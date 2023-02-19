@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+    
+{% block content %}
+
+<form method="post">
+    <input type="text" name="nome" placeholder="Nome completo">
+    <input type="date" name="nascimento" placeholder="Data de nascimento">
+    <input type="number" name="credito" placeholder="Credito inicial 0.00">
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+{% endblock %}
