@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, redirect
 from src.db import *
+from datetime import date
+
 app = Flask(__name__)
 
 # caso pg n exista
@@ -27,3 +29,22 @@ def cadastraClientes():
   insereCliente(nome, nascimento, credito)
 
   return "Cliente cadastrado com sucesso."
+
+@app.route('/cadastraJogo')
+def jogo():
+    return render_template('/public/jogos/cadastraJogo.html')
+
+# pós inputs
+@app.route('/cadastraJogo', methods=['POST', 'GET'])
+def cadastraJogos():
+
+  nome = request.form['nome']
+  publicadora = request.form['publicadora']
+  maior18 = request.form['maior18']
+  genero = request.form['genero']
+  preco = request.form['preco']
+
+  insereJogo(nome, publicadora, maior18, genero, preco)
+
+  return "Cliente cadastrado com sucesso."
+date.today()
