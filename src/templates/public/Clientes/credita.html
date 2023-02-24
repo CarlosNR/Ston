@@ -4,7 +4,7 @@
 
 <form form action="/update/cliente/credito/{{id}}" method="POST">
     <label for="creditoAdicional">Digite a quantidade de credito que deseja adicionar. Saldo atual: {{credito}}</label>
-    <input type="number" name="creditoAdicional" placeholder="0.00" min="0.00">
+    <input type="number" name="creditoAdicional" step="0.1" placeholder="0.00" min="0.00">
 
     <button type="submit">Creditar</button>
 </form>

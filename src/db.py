@@ -17,27 +17,21 @@ cursor = conn.cursor()
 #clientes
 def insereCliente(nome, nascimento, credito):
 
-    cursor.execute("insert into clientes (nome, nascimento, credito) values (%s, %s, %s);",(nome, nascimento, credito))
+    cursor.execute("insert into clientes (nome, nascimento, credito) values (%s, %s, %s) returning id;",(nome, nascimento, credito))
     conn.commit()
-
+    return cursor.fetchone()
 def deletaCliente(id):
     cursor.execute("delete from clientes where id=%s;",(id, ))
     conn.commit()
-
 def adicionaCredito(id, credito):
     cursor.execute("update clientes set credito = (credito + %s) where id = %s;",(credito, id))
     conn.commit()
-
-
 def achaClientes():
     cursor.execute("select * from clientes;")
-    conn.commit()
     return cursor.fetchall()
-
 def achaCliente(id):
     cursor.execute("select * from clientes where id=%s;",(id, ))
-    conn.commit()
-    return cursor.fetchone
+    return cursor.fetchone()
 
 #jogos
 def insereJogo(nome, publicadora, maior18, genero, preco):
@@ -48,42 +42,32 @@ def insereJogo(nome, publicadora, maior18, genero, preco):
 def atualizaNomeJogo(id, nome):
     cursor.execute("update jogos set nome = %s where id = %s;",(nome, id))
     conn.commit()
-
 def atualizaPublicadoraJogo(id, publicadora):
     cursor.execute("update jogos set publicadora = %s where id = %s;",(publicadora, id))
     conn.commit()
-
 def atualizaMaior18(id, maior18):
     cursor.execute("update jogos set maior18 = %s where id = %s;",(maior18, id))
     conn.commit()
-
 def atualizaGeneroJogo(id, genero):
     cursor.execute("update jogos set genero = %s where id = %s;",(genero, id))    
     conn.commit()
-
 def atualizaPrecoJogo(id, preco):
     cursor.execute("update jogos set preco = %s where id = %s;",(preco, id))    
     conn.commit()
-
 def achaJogos():
     cursor.execute("select * from jogos;")
-    conn.commit()
     return cursor.fetchall()
-
 def achaJogo(nome):
     #caso 2 jogos tenham mesmo nome, ie street fighter 2 e street fighter 2 turbo edition
     cursor.execute("select *, position(('%s') in nome) from jogos where position('%s' in nome)>0;",(nome, nome))
-    conn.commit()
     return cursor.fetchall
 
 #compra
 def insereCompra(idcliente, idjogo, datacompra):
     cursor.execute("insert into compra (idcliente, idjogo, datacompra) values (%s, %s, %s);",(idcliente, idjogo, datacompra))
     conn.commit()
-
 def achaCompras(idCliente):
     cursor.execute("select * from compra where idCliente=%s;",(idCliente,))
-    conn.commit()
     return cursor.fetchall()
 
 #encerra conexao

@@ -22,20 +22,40 @@ def cliente():
 @app.route('/insert/cliente', methods=['POST', 'GET'])
 def cadastraClientes():
 
-  nome = request.form['nome']
-  nascimento = request.form['nascimento']
-  credito = request.form['credito']
+    nome = request.form['nome']
+    nascimento = request.form['nascimento']
+    credito = request.form['credito']
 
-  insereCliente(nome, nascimento, credito)
+    dados = insereCliente(nome, nascimento, credito)
 
-  return "Cliente cadastrado com sucesso."
+    return render_template('/public/clientes/cadastraCliente.html', dados=dados)
 
+@app.route('/read/cliente')
+def readCliente1():
+    return render_template('/public/clientes/listaCliente.html')
+
+# pós inputs
+@app.route('/read/cliente', methods=['POST', 'GET'])
+def readCliente2():
+
+    id = request.form['id']
+    dados = achaCliente(id)
+    if (dados != None):
+      compras = achaCompras(id)
+      return render_template('/public/clientes/listaCliente.html', dados=dados, compras=compras)
+    else:
+      nenhum = True
+      print()
+      print(nenhum)
+      print()
+      return render_template('/public/clientes/listaCliente.html', nenhum=nenhum)
+      
 @app.route('/read/clientes')
 def listaClientes():
     listaClientes = achaClientes()
     return render_template('/public/clientes/listaClientes.html', listaClientes=listaClientes)
 
-@app.route('/update/cliente/credito/<int:id>/<float:credito>')
+@app.route('/update/cliente/credito/<int:id>/<float:credito>', methods=['POST', 'GET'])
 def creditaUm(id, credito):
     
     return render_template('/public/clientes/credita.html', id=id, credito=credito)
@@ -48,10 +68,11 @@ def creditaDois(id):
   print(creditoAdicional)
   return "Creditado com sucesso."
 
-@app.route('/delete/cliente/<id>', methods=['POST', 'GET'])
-def excluiCliente(id):
-  deletaCliente(id)
-  return "Cliente removido com sucesso"
+@app.route('/delete/cliente/<idApagado>', methods=['POST', 'GET'])
+def excluiCliente(idApagado):
+  deletaCliente(idApagado)
+  listaClientes = achaClientes()
+  return render_template('/public/clientes/listaClientes.html', idApagado=idApagado, listaClientes=listaClientes)
 
 @app.route('/insert/jogo')
 def jogo():

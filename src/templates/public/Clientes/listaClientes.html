@@ -1,6 +1,9 @@
 {% extends "base.html" %}
     
 {% block content %}
+{% if idApagado %}
+    O cliente de id {{idApagado}} foi removido com sucesso.
+    {% endif %}
 
 {% for cliente in listaClientes %}
     <br>
@@ -11,7 +14,9 @@
     <pre>Nome: {{cliente.1}} </pre>
     <pre>Data de nascimento: {{cliente.2.strftime('%d-%m-%Y')}}</pre>
     <pre>Credito atual: {{cliente.3}}</pre>
-    <a href="/update/cliente/credito/{{cliente.0}}/{{cliente.3}}">Creditar</a>
+    <form action="/update/cliente/credito/{{cliente.0}}/{{cliente.3}}" method="POST">
+        <button>Creditar</button>
+    </form>
 
         {% else %}
         Não há clientes cadastrados.
