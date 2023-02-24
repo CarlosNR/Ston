@@ -21,11 +21,13 @@ def insereCliente(nome, nascimento, credito):
     conn.commit()
 
 def deletaCliente(id):
-    cursor.execute("delete from clientes where id=%s;",(id))
+    cursor.execute("delete from clientes where id=%s;",(id, ))
     conn.commit()
 
-def atualizaCredito(id):
-    cursor.execute("update clientes set credito = (credito + %s) where id = %s;",(nome, id))
+def adicionaCredito(id, credito):
+    cursor.execute("update clientes set credito = (credito + %s) where id = %s;",(credito, id))
+    conn.commit()
+
 
 def achaClientes():
     cursor.execute("select * from clientes;")
@@ -33,7 +35,7 @@ def achaClientes():
     return cursor.fetchall()
 
 def achaCliente(id):
-    cursor.execute("select * from clientes where id=%s;",(id))
+    cursor.execute("select * from clientes where id=%s;",(id, ))
     conn.commit()
     return cursor.fetchone
 

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+    
+{% block content %}
+
+{% for cliente in listaClientes %}
+    <br>
+    <pre>Id: {{cliente.0}} </pre>
+    <form action="/delete/cliente/{{cliente.0}}" method="POST">
+        <button>Deletar</button>
+    </form>
+    <pre>Nome: {{cliente.1}} </pre>
+    <pre>Data de nascimento: {{cliente.2.strftime('%d-%m-%Y')}}</pre>
+    <pre>Credito atual: {{cliente.3}}</pre>
+    <a href="/update/cliente/credito/{{cliente.0}}/{{cliente.3}}">Creditar</a>
+
+        {% else %}
+        Não há clientes cadastrados.
+    {% endfor %}
+
+{% endblock %}
