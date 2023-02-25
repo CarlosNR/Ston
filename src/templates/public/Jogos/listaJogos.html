@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+    
+{% block content %}
+
+{% if mensagem %}
+    <p>{{mensagem}}</p>
+    {% endif %}
+
+{% for jogo in listaJogos %}
+    <br>
+    <pre>Id: {{jogo.0}} </pre>
+    <form action="/delete/jogo/{{jogo.0}}" method="POST">
+        <button>Deletar</button>
+    </form>
+    <pre>Nome: {{jogo.1}} </pre>
+    <pre>Publicadora: {{jogo.2}}</pre>
+    <pre>Maior18: {{jogo.3}}</pre>
+    <pre>Genero: {{jogo.4}}</pre>
+    <pre>Preço: {{jogo.5}}</pre>
+    <form action="/update/jogo/preco/{{jogo.0}}" method="POST">
+        <button>Atualizar preço</button>
+    </form>
+
+        {% else %}
+        Não há jogos cadastrados ainda.
+    {% endfor %}
+
+{% endblock %}

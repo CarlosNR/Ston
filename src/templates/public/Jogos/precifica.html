@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+    
+{% block content %}
+
+<form form action="/update/jogo/preco/{{id}}/{{preco}}" method="POST">
+    <label for="novoPreco">Digite o novo preço do jogo. Valor atual: {{preco}}</label>
+    <input type="number" name="novoPreco" step="0.1" placeholder="0.00" min="0.00">
+
+    <button type="submit">Atualizar</button>
+</form>
+
+{% endblock %}
