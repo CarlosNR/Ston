@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+    
+{% block content %}
+
+{% if repetidos %}
+<p>Favor considerar que estas versões do jogo já estão no banco de dados:</p>
+{% for repetido in repetidos %}
+    {{repetido.1}} <br>    
+    {% endfor %}
+
+<p>Gostaria de realizar o cadastro mesmo assim?</p>
+<form action="/insert/jogo/pt2" method="POST">
+    <button type="submit">Sim</button>
+</form>
+<a href="/insert/jogo/pt1">
+    <button>Não</button>
+</a>
+    {% endif %}
+{% endblock %}

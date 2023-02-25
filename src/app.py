@@ -1,8 +1,12 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
+from flask_session import Session
 from src.db import *
 from datetime import date
 
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 # caso pg n exista
 @app.errorhandler(404) 
@@ -14,6 +18,7 @@ def not_found(e):
 def index():
     return render_template('/public/index.html')
 
+# pré input
 @app.route('/insert/cliente')
 def cliente():
     return render_template('/public/clientes/cadastraCliente.html')
@@ -34,7 +39,6 @@ def cadastraClientes():
 def readCliente1():
     return render_template('/public/clientes/listaCliente.html')
 
-# pós inputs
 @app.route('/read/cliente', methods=['POST', 'GET'])
 def readCliente2():
 
@@ -49,19 +53,19 @@ def readCliente2():
       print(nenhum)
       print()
       return render_template('/public/clientes/listaCliente.html', nenhum=nenhum)
-      
+
 @app.route('/read/clientes')
 def listaClientes():
     listaClientes = achaClientes()
     return render_template('/public/clientes/listaClientes.html', listaClientes=listaClientes)
 
 @app.route('/update/cliente/credito/<int:id>/<float:credito>', methods=['POST', 'GET'])
-def creditaUm(id, credito):
+def credita1(id, credito):
     
     return render_template('/public/clientes/credita.html', id=id, credito=credito)
 
 @app.route('/update/cliente/credito/<int:id>', methods=['POST', 'GET'])
-def creditaDois(id):
+def credita2(id):
 
   creditoAdicional = request.form['creditoAdicional']
   adicionaCredito(id, creditoAdicional)  
@@ -74,21 +78,62 @@ def excluiCliente(idApagado):
   listaClientes = achaClientes()
   return render_template('/public/clientes/listaClientes.html', idApagado=idApagado, listaClientes=listaClientes)
 
-@app.route('/insert/jogo')
-def jogo():
-    return render_template('/public/jogos/cadastraJogo.html')
+@app.route('/insert/jogo/pt1')
+def jogo1():
+    return render_template('/public/jogos/cadastraJogo1.html')
 
 # pós inputs
-@app.route('/insert/jogo', methods=['POST', 'GET'])
+@app.route('/insert/jogo/pt1', methods=['POST', 'GET'])
+def insereJogo1():
+ 
+  session["nome"] = request.form['nome']
+  nome = session["nome"]
+  session["publicadora"] = request.form['publicadora']
+  session["maior18"] = request.form['maior18']
+  session["genero"] = request.form['genero']
+  session["preco"] = request.form['preco']
+
+  if (achaJogo(nome)):
+    mensagem = "Jogo com nome identico já incluso, cadastro falhou."
+    return render_template('/public/jogos/cadastrajogo1.html', mensagem=mensagem)
+
+  else:
+    repetidos = achaJogoNomeParecido(nome) 
+    
+    if (repetidos):
+      return render_template('/public/jogos/cadastrajogo2.html', repetidos=repetidos, )
+    else:
+      mensagem = "Jogo cadastrado com sucesso."
+      return render_template('/public/jogos/cadastrajogo1.html', mensagem=mensagem)
+
+
+@app.route('/insert/jogo/pt2')
+def jogo2():
+    return render_template('/public/jogos/cadastrajogo2.html')
+
+# pós inputs
+@app.route('/insert/jogo/pt2', methods=['POST', 'GET'])
 def cadastraJogos():
 
-  nome = request.form['nome']
-  publicadora = request.form['publicadora']
-  maior18 = request.form['maior18']
-  genero = request.form['genero']
-  preco = request.form['preco']
 
-  insereJogo(nome, publicadora, maior18, genero, preco)
+  nome = session["nome"]
+  publicadora = session["publicadora"]
+  maior18 = session["maior18"]
+  genero = session["genero"]
+  preco = session["preco"]
 
-  return "Cliente cadastrado com sucesso."
-date.today()
+  insereJogo(nome, publicadora, maior18, genero, preco)  
+  mensagem = "Jogo cadastrado com sucesso."
+
+  #if: session só for usado em insere jogo, session clear sera usado, 
+  #else: deletar campo a campo
+
+  # session["nome"] = None
+  # session["publicadora"] = None
+  # session["maior18"] = None
+  # session["genero"] = None
+  # session["preco"] = None
+
+  session.clear()
+
+  return render_template('/public/jogos/cadastrajogo1.html', mensagem=mensagem)

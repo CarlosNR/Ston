@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+    
+{% block content %}
+
+{% if mensagem %}
+    {{mensagem}}
+    {% endif %}
+<form action="/insert/jogo/pt1" method="POST">
+
+    <input type="text" name="nome" placeholder="Nome do jogo">
+    <input type="text" name="publicadora" placeholder="Empresa que publicou o jogo">
+    <input type="text" name="genero" placeholder="Estilo do jogo, luta, rpg...">
+    <input type="number" name="preco" placeholder="Preço do jogo: 0.00" min="0" step="0.1">
+    
+    <p>O jogo é para maiores de 18 anos?</p>
+        <input type="radio" id="maior18" name="maior18" value="True">
+        <label for="maior18">Sim</label><br>
+        <input type="radio" id="menor18" name="maior18" value="False">
+        <label for="menor18">Não</label><br>
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+{% endblock %}

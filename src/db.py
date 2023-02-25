@@ -58,9 +58,12 @@ def achaJogos():
     cursor.execute("select * from jogos;")
     return cursor.fetchall()
 def achaJogo(nome):
+    cursor.execute("select * from jogos where nome=%s;",(nome, ))
+    return cursor.fetchall()
+def achaJogoNomeParecido(nome):
     #caso 2 jogos tenham mesmo nome, ie street fighter 2 e street fighter 2 turbo edition
-    cursor.execute("select *, position(('%s') in nome) from jogos where position('%s' in nome)>0;",(nome, nome))
-    return cursor.fetchall
+    cursor.execute("select * from jogos where position(%s in nome)>0;",(nome, ))
+    return cursor.fetchall()
 
 #compra
 def insereCompra(idcliente, idjogo, datacompra):
