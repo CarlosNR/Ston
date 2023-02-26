@@ -59,6 +59,7 @@ def achaJogoNomeParecido(nome):
     #caso 2 jogos tenham mesmo nome, ie street fighter 2 e street fighter 2 turbo edition
     cursor.execute("select * from jogos where position(%s in nome)>0;",(nome, ))
     return cursor.fetchall()
+    
 def deletaJogo(id):
     cursor.execute("delete from jogos where id=%s;",(id, ))
     conn.commit()

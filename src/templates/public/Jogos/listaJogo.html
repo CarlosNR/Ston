@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+    
+{% block content %}
+
+<form action="/read/jogo" method="POST">
+    <label for="nome">Insira nome do jogo:</label>
+    <input name="nome" type="text">
+    <button>Pesquisar</button>
+</form>
+
+{% if nada %}
+    Nenhum game cadastrado com este nome.
+    {% else %}
+        {% for jogo in jogos %}
+        <pre>Id: {{jogo.0}} </pre>
+        <pre>Nome: {{jogo.1}} </pre>
+        <form action="" method="POST">
+            <button>Selecionar</button>
+        </form>
+        <pre>Publicadora: {{jogo.2}}</pre>
+        <pre>Maior18: {{jogo.3}}</pre>
+        <pre>Genero: {{jogo.4}}</pre>
+        <pre>Preço: {{jogo.5}}</pre>
+        {% endfor %}
+        {% endif %}
+
+
+{% endblock %}

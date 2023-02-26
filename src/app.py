@@ -49,9 +49,6 @@ def readCliente2():
       return render_template('/public/clientes/listaCliente.html', dados=dados, compras=compras)
     else:
       nenhum = True
-      print()
-      print(nenhum)
-      print()
       return render_template('/public/clientes/listaCliente.html', nenhum=nenhum)
 
 @app.route('/read/clientes')
@@ -76,9 +73,6 @@ def creditar2(id):
   creditoAdicional = request.form['creditoAdicional']
   #fetchone retorna vetor msm se tiver apenas 1 item
   saldo = adicionaCredito(id, creditoAdicional) 
-  print()
-  print(saldo)
-  print()
   session["mensagemCreditar"] = "O cliente de id %s teve seus creditos adicionados em %.2f e está com %.2f de saldo" % (id, float(creditoAdicional), float(saldo[0]))
 
   return redirect('/read/clientes')
@@ -152,6 +146,21 @@ def listaJogos():
     listaJogos = achaJogos()
     return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos)
 
+@app.route('/read/jogo')
+def readJogo1():
+    return render_template('/public/jogos/listaJogo.html')
+
+@app.route('/read/jogo', methods=['POST', 'GET'])
+def readJogo2():
+
+    nome = request.form['nome']
+    jogos = achaJogoNomeParecido(nome)    
+    if (jogos):
+      return render_template('/public/jogos/listaJogo.html', jogos=jogos)
+    else:
+      nada=True
+      return render_template('/public/jogos/listaJogo.html', nada=nada)
+      
 @app.route('/update/jogo/preco/<int:id>', methods=['POST', 'GET'])
 def precificar1(id):
     jogo = achaJogoId(id)
