@@ -13,17 +13,22 @@ Session(app)
 def not_found(e): 
   return e
 
-# home
 @app.route('/')
 def index():
-    return render_template('/public/index.html')
+    if("idLogado" in session):
+      dados = []
+      dados.append(session["idLogado"])
+      dados.append(session["nomeLogado"])
+      dados.append(session["creditoLogado"])
+      return render_template('/public/index.html', dados=dados)
+    else:
+      return render_template('/public/index.html')
 
 # Clientes
 @app.route('/insert/cliente')
 def cliente():
     return render_template('/public/clientes/cadastraCliente.html')
 
-# 
 @app.route('/insert/cliente', methods=['POST', 'GET'])
 def cadastraClientes():
 
@@ -31,9 +36,9 @@ def cadastraClientes():
     nascimento = request.form['nascimento']
     credito = request.form['credito']
 
-    dados = insereCliente(nome, nascimento, credito)
+    dadosInsert = insereCliente(nome, nascimento, credito)
 
-    return render_template('/public/clientes/cadastraCliente.html', dados=dados)
+    return render_template('/public/clientes/cadastraCliente.html', dadosInsert=dadosInsert)
 
 @app.route('/read/cliente')
 def readCliente1():
@@ -43,10 +48,10 @@ def readCliente1():
 def readCliente2():
 
     id = request.form['id']
-    dados = achaCliente(id)
-    if (dados != None):
+    dadosLogin = achaCliente(id)
+    if (dadosLogin != None):
       compras = achaCompras(id)
-      return render_template('/public/clientes/listaCliente.html', dados=dados, compras=compras)
+      return render_template('/public/clientes/listaCliente.html', dadosLogin=dadosLogin, compras=compras)
     else:
       nenhum = True
       return render_template('/public/clientes/listaCliente.html', nenhum=nenhum)
@@ -62,7 +67,25 @@ def listaClientes():
     listaClientes = achaClientes()
     return render_template('/public/clientes/listaClientes.html', listaClientes=listaClientes)
 
-@app.route('/update/cliente/credito/<int:id>/<float:credito>', methods=['POST', 'GET'])
+@app.route('/read/cliente/login')
+def login1():
+    return render_template('/public/clientes/logaCliente.html')
+
+@app.route('/read/cliente/login', methods=['POST', 'GET'])
+def login2():
+
+    id = request.form['id']
+    nascimento = request.form['nascimento']
+    dados = login(id, nascimento)
+    if (dados):
+      session["idLogado"] = dados[0]
+      session["nomeLogado"] = dados[1]
+      session["creditoLogado"] = dados[3]
+      return render_template("/public/index.html", dados=dados)
+    else:
+      return render_template('/public/clientes/logaCliente.html', nenhum=True)
+
+@app.route('/update/cliente/login', methods=['POST', 'GET'])
 def creditar1(id, credito):
     
     return render_template('/public/clientes/credita.html', id=id, credito=credito)
@@ -177,6 +200,24 @@ def precificar2(id,preco):
 
 @app.route('/delete/jogo/<idApagado>', methods=['POST', 'GET'])
 def excluiJogo(idApagado):
+
   deletaJogo(idApagado)
   listaJogos = achaJogos()
   return render_template('/public/jogos/listaJogos.html', idApagado=idApagado, listaJogos=listaJogos)
+
+#compras
+@app.route('/insert/compra/<int:idJogo>/<string:nomeJogo>/<float:preco>', methods=['POST', 'GET'])
+def cadastraCompra(idJogo,nomeJogo,preco):
+
+    result = insereCompra(session["idLogado"], idJogo, date.today())
+
+    if (result):
+      
+      session["creditoLogado"] = result
+      mensagemCompraSucesso = True
+
+      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], nomeJogo=nomeJogo, mensagemCompraSucesso=mensagemCompraSucesso)
+  
+    else:
+
+      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = "Saldo insuficiente para comprar este game.")

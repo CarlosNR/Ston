@@ -17,7 +17,6 @@
         <button>Deletar</button>
     </form>
     <pre>Nome: {{cliente.1}} </pre>
-    <pre>Data de nascimento: {{cliente.2.strftime('%d-%m-%Y')}}</pre>
     <pre>Credito atual: {{cliente.3}}</pre>
     <form action="/update/cliente/credito/{{cliente.0}}/{{cliente.3}}" method="POST">
         <button>Creditar</button>

@@ -2,12 +2,17 @@
     
 {% block content %}
 
+<form action="/read/cliente" method="POST">
+    <label for="id">Insira o id do usuário que deseja pesquisar:</label>
+    <input name="id" type="number">
+    <button>Pesquisar</button>
+</form>
+
 {% if dados %}
 
     <pre>
         O cliente de id: {{dados.0}}
         Se chama: {{dados.1}}
-        Nasceu em: {{dados.2.strftime('%d-%m-%Y')}}
         E tem de saldo: {{dados.3}}
 {% if compras %}
     E realizou as seguintes compras:
@@ -22,11 +27,5 @@
         Cliente solicitado não está cadastrado.
     </pre>
     {% endif %}
-
-<form action="/read/cliente" method="POST">
-    <label for="id">Insira o id do usuário que deseja pesquisar:</label>
-    <input name="id" type="number">
-    <button>Pesquisar</button>
-</form>
 
 {% endblock %}

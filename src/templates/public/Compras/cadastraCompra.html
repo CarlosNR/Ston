@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+    
+{% block content %}
+{% if dados %}
+    Compra realizada com sucesso.
+    {% endif %}
+    
+<form action="/insert/compra" method="POST">
+    <input type="text" name="nome" placeholder="Grand Theft Auto">
+    <input type="number" name="idUsuario" placeholder="0">
+    <button type="submit">Cadastrar</button>
+</form>
+
+{% endblock %}

@@ -2,6 +2,17 @@
     
 {% block content %}
 
-pg inicial
+{% if dadosInsert %}
+    <p>{{dadosInsert.1}} está on na Ston!</p>
+    <p>Seu saldo atual é de {{dadosInsert.3}} creditos</p>
+    <a href="/read/jogo">Comprar game</a>
 
+    {% elif %}
+    <p>{{dadosInsert.1}} está on na Ston!</p>
+    <p>Seu saldo atual é de {{dadosInsert.2}} creditos</p>
+    <a href="/read/jogo">Comprar game</a>
+    
+    {% else %}
+        Seja bem vindo a Ston.
+        {% endif %}
 {% endblock %}
