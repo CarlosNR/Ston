@@ -3,15 +3,15 @@
 {% block content %}
 
 {% if nomeLogado %}
-    {{nomeLogado}}, tens {{creditoLogado}} em teu saldo.
+    <p>{{nomeLogado}}, tens {{creditoLogado.0}} em teu saldo.</p>
     {% endif %}
-<br>
+
 {% if mensagemCompraFalha %}
-    {{mensagemCompraFalha}}
+    <p>{{mensagemCompraFalha}}</p>
     {% endif %}
 
 {% if mensagemCompraSucesso %}    
-    Compra realizada com sucesso, {{nomeJogo}} foi adicionado a tua lista de jogos!
+    <p>Compra realizada com sucesso:<br> {{nomeJogo}} foi adicionado a tua lista de jogos!</p>
     {% endif %}
 
 <form action="/read/jogo" method="POST">

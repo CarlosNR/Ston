@@ -16,11 +16,11 @@ def not_found(e):
 @app.route('/')
 def index():
     if("idLogado" in session):
-      dados = []
-      dados.append(session["idLogado"])
-      dados.append(session["nomeLogado"])
-      dados.append(session["creditoLogado"])
-      return render_template('/public/index.html', dados=dados)
+      dadosLogado = []
+      dadosLogado.append(session["idLogado"])
+      dadosLogado.append(session["nomeLogado"])
+      dadosLogado.append(session["creditoLogado"])
+      return render_template('/public/index.html', dadosLogado=dadosLogado)
     else:
       return render_template('/public/index.html')
 
@@ -36,9 +36,9 @@ def cadastraClientes():
     nascimento = request.form['nascimento']
     credito = request.form['credito']
 
-    dadosInsert = insereCliente(nome, nascimento, credito)
+    dados = insereCliente(nome, nascimento, credito)
 
-    return render_template('/public/clientes/cadastraCliente.html', dadosInsert=dadosInsert)
+    return render_template('/public/clientes/cadastraCliente.html', dados=dados)
 
 @app.route('/read/cliente')
 def readCliente1():
