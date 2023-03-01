@@ -81,7 +81,7 @@ def achaJogoNomeParecido(nome):
     return cursor.fetchall()
     
 def deletaJogo(id):
-    cursor.execute("delete from jogos where id=%s;",(id, ))
+    cursor.execute("delete from jogos where id=%s returning nome;",(id, ))
     conn.commit()
     return cursor.fetchone()
 

@@ -178,6 +178,11 @@ def listaJogos():
       return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos, mensagem=mensagem)
       
     listaJogos = achaJogos()
+    if "mensagemErroDeleteJogo" in session:
+      mensagemErroDeleteJogo = session["mensagemErroDeleteJogo"]
+      del session["mensagemErroDeleteJogo"]
+      return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos, mensagemErroDeleteJogo=mensagemErroDeleteJogo)
+
     return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos)
 
 @app.route('/read/jogo')
@@ -213,11 +218,13 @@ def precificar2(id,preco):
 def excluiJogo(idApagado):
 
   try:
-    deletaJogo(idApagado)
+    nome = deletaJogo(idApagado)
+    mensagemDeleteJogo = "Jogo "+nome[0]+" foi deletado com sucesso."
+
     listaJogos = achaJogos()
-    return render_template('/public/jogos/listaJogos.html', idApagado=idApagado, listaJogos=listaJogos)
+    return render_template('/public/jogos/listaJogos.html', idApagado=idApagado, listaJogos=listaJogos, mensagemDeleteJogo=mensagemDeleteJogo)
   except:
-    session["mensagemErroDeleteJogo"] = True
+    session["mensagemErroDeleteJogo"] = "Jogo não pode ser apagado pois alguem já comprou."
     return redirect('/read/jogos')
 
 #compras
