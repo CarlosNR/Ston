@@ -2,6 +2,10 @@
     
 {% block content %}
 
+{% if "mensagemErroDeleteJogo" in session %}
+    <p>O game já foi comprado por alguem e não pode ser deletado.</p>
+    {% endif %}
+
 {% if mensagem %}
     <p>{{mensagem}}</p>
     {% endif %}

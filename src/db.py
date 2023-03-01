@@ -61,6 +61,9 @@ def atualizaPrecoJogo(id, preco):
     conn.commit()
     
 def achaJogos():
+    #caso deleteJogo não puder deletar, permite outras transações no banco
+    cursor.execute("ROLLBACK")
+    conn.commit()
     cursor.execute("select * from jogos;")
     return cursor.fetchall()
 
@@ -80,6 +83,7 @@ def achaJogoNomeParecido(nome):
 def deletaJogo(id):
     cursor.execute("delete from jogos where id=%s;",(id, ))
     conn.commit()
+    return cursor.fetchone()
 
 #compras
 def insereCompra(idCliente, idJogo, dataCompra):

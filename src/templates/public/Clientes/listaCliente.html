@@ -5,15 +5,15 @@
 <form action="/read/cliente" method="POST">
     <label for="id">Insira o id do usuário que deseja pesquisar:</label>
     <input name="id" type="number">
-    <button>Pesquisar</button>
+    <button type="submit">Pesquisar</button>
 </form>
 
-{% if dados %}
+{% if dadosLogin %}
 
     <pre>
-        O cliente de id: {{dados.0}}
-        Se chama: {{dados.1}}
-        E tem de saldo: {{dados.3}}
+        O cliente de id: {{dadosLogin.0}}
+        Se chama: {{dadosLogin.1}}
+        E tem de saldo: {{dadosLogin.3}}
 {% if compras %}
     E realizou as seguintes compras:
     {% for compra in compras %}

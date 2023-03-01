@@ -118,11 +118,11 @@ def excluiCliente(idApagado):
   return render_template('/public/clientes/listaClientes.html', idApagado=idApagado, listaClientes=listaClientes)
 
 #Jogos
-@app.route('/insert/jogo/pt1')
+@app.route('/insert/jogo')
 def jogo1():
-    return render_template('/public/jogos/cadastraJogo1.html')
+    return render_template('public/jogos/cadastraJogo1.html')
 
-@app.route('/insert/jogo/pt1', methods=['POST', 'GET'])
+@app.route('/insert/jogo', methods=['POST', 'GET'])
 def insereJogo1():
  
   session["nome"] = request.form['nome']
@@ -132,7 +132,7 @@ def insereJogo1():
   session["genero"] = request.form['genero']
   session["preco"] = request.form['preco']
 
-  if (achaJogo(nome)):
+  if (achaJogoNome(nome)):
     mensagem = "Jogo com nome identico já incluso, cadastro falhou."
     return render_template('/public/jogos/cadastrajogo1.html', mensagem=mensagem)
 
@@ -212,9 +212,13 @@ def precificar2(id,preco):
 @app.route('/delete/jogo/<idApagado>', methods=['POST', 'GET'])
 def excluiJogo(idApagado):
 
-  deletaJogo(idApagado)
-  listaJogos = achaJogos()
-  return render_template('/public/jogos/listaJogos.html', idApagado=idApagado, listaJogos=listaJogos)
+  try:
+    deletaJogo(idApagado)
+    listaJogos = achaJogos()
+    return render_template('/public/jogos/listaJogos.html', idApagado=idApagado, listaJogos=listaJogos)
+  except:
+    session["mensagemErroDeleteJogo"] = True
+    return redirect('/read/jogos')
 
 #compras
 @app.route('/insert/compra/<int:idJogo>/<string:nomeJogo>/<float:preco>', methods=['POST', 'GET'])
