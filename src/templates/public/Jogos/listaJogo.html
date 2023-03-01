@@ -2,8 +2,10 @@
     
 {% block content %}
 
-{% if nomeLogado %}
-    <p>{{nomeLogado}}, tens {{creditoLogado.0}} em teu saldo.</p>
+{% if dadosLogado %}
+    <p>{{dadosLogado.1}}, tens {{dadosLogado.2}} em teu saldo.</p>
+    {% else %}
+    <p>Para comprar um jogo, favor logar antes.</p>
     {% endif %}
 
 {% if mensagemCompraFalha %}
@@ -20,7 +22,8 @@
     <button>Pesquisar</button>
 </form>
 
-{% if nada %}
+{% if dadosLogado %}
+    {% if nada %}
     Nenhum game cadastrado com este nome.
     {% else %}
         {% for jogo in jogos %}
@@ -35,6 +38,20 @@
         </form>
             {% endfor %}
         {% endif %}
+    {% else%}
+        {% if nada %}
+            Nenhum game cadastrado com este nome.
+            {% else %}
+                {% for jogo in jogos %}
+                <pre>Id: {{jogo.0}} </pre>
+                <pre>Nome: {{jogo.1}} </pre>
+                <pre>Publicadora: {{jogo.2}}</pre>
+                <pre>Maior18: {{jogo.3}}</pre>
+                <pre>Genero: {{jogo.4}}</pre>
+                <pre>Preço: {{jogo.5}}</pre>
+                    {% endfor %}
+                {% endif %}
+    {% endif %}
 
 
 {% endblock %}

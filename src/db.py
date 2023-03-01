@@ -105,6 +105,18 @@ def achaCompras(idCliente):
     cursor.execute("select * from compras where idCliente=%s;",(idCliente,))
     return cursor.fetchall()
 
+# def exemplo():
+#     try:
+#         cursor.execute("select * from cliente ;")
+#         conn.commit()
+#         # close the database communication
+#         cursor.close()
+#     except psycopg2.DatabaseError as error:
+#         cursor.execute("ROLLBACK")
+#         conn.commit()
+#     finally:
+#         #encerra conexao
+        
 #encerra conexao
 # cursor.close()
 # conn.close

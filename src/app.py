@@ -90,7 +90,7 @@ def login2():
       session["idLogado"] = dados[0]
       session["nomeLogado"] = dados[1]
       session["creditoLogado"] = dados[3]
-      return redirect("/public/index.html")
+      return redirect("/")
     else:
       return render_template('/public/clientes/logaCliente.html', nenhum=True)
 
@@ -192,13 +192,21 @@ def readJogo1():
 @app.route('/read/jogo', methods=['POST', 'GET'])
 def readJogo2():
 
+    if ("idLogado" in session):
+      dadosLogado = []
+      dadosLogado.append(session["idLogado"])
+      dadosLogado.append(session["nomeLogado"])
+      dadosLogado.append(session["creditoLogado"])
+    else:
+      dadosLogado = False
+
     nome = request.form['nome']
     jogos = achaJogoNomeParecido(nome)    
     if (jogos):
-      return render_template('/public/jogos/listaJogo.html', jogos=jogos)
+      return render_template('/public/jogos/listaJogo.html', jogos=jogos, dadosLogado=dadosLogado)
     else:
       nada=True
-      return render_template('/public/jogos/listaJogo.html', nada=nada)
+      return render_template('/public/jogos/listaJogo.html', nada=nada, dadosLogado=dadosLogado)
       
 @app.route('/update/jogo/preco/<int:id>', methods=['POST', 'GET'])
 def precificar1(id):
