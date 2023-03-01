@@ -2,9 +2,13 @@
     
 {% block content %}
 
-<form form action="/update/cliente/credito/{{id}}" method="POST">
+<form action="/update/cliente/credito/{{id}}/valor" method="POST">
+
+    {% if mensagemCredita %}
+        {{mensagemCredita}}
+        {% endif %}
     <label for="creditoAdicional">Digite a quantidade de credito que deseja adicionar. Saldo atual: {{credito}}</label>
-    <input type="number" name="creditoAdicional" step="0.1" placeholder="0.00" min="0.00">
+    <input type="number" name="creditoAdicional" step="0.1" placeholder="0.00" min="0.00" required>
 
     <button type="submit">Creditar</button>
 </form>

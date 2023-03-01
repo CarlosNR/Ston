@@ -6,6 +6,9 @@
     <p>{{dadosLogado.1}} está on na Ston!</p>
     <p>Seu saldo atual é {{dadosLogado.3}}</p>
     <a href="/read/jogo">Comprar game</a>
+    <form action="/read/cliente/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
     {% else %}
         Seja bem vindo a Ston.
         {% endif %}

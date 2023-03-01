@@ -8,7 +8,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# caso pg n exista
+# Acesso
 @app.errorhandler(404) 
 def not_found(e): 
   return e
@@ -23,6 +23,15 @@ def index():
       return render_template('/public/index.html', dadosLogado=dadosLogado)
     else:
       return render_template('/public/index.html')
+
+@app.route('/read/cliente/logout', methods=['POST', 'GET'])
+def logout():
+    if("idLogado" in session):
+        del session["idLogado"]
+        del session["nomeLogado"]
+        del session["creditoLogado"]
+
+    return redirect('/')
 
 # Clientes
 @app.route('/insert/cliente')
@@ -81,24 +90,26 @@ def login2():
       session["idLogado"] = dados[0]
       session["nomeLogado"] = dados[1]
       session["creditoLogado"] = dados[3]
-      return render_template("/public/index.html", dados=dados)
+      return redirect("/public/index.html")
     else:
       return render_template('/public/clientes/logaCliente.html', nenhum=True)
 
-@app.route('/update/cliente/login', methods=['POST', 'GET'])
-def creditar1(id, credito):
-    
-    return render_template('/public/clientes/credita.html', id=id, credito=credito)
-
 @app.route('/update/cliente/credito/<int:id>', methods=['POST', 'GET'])
+def creditar1(id):
+
+     return render_template('/public/clientes/credita.html', id=id)
+
+@app.route('/update/cliente/credito/<int:id>/valor', methods=['POST', 'GET'])
 def creditar2(id):
 
-  creditoAdicional = request.form['creditoAdicional']
-  #fetchone retorna vetor msm se tiver apenas 1 item
-  saldo = adicionaCredito(id, creditoAdicional) 
-  session["mensagemCreditar"] = "O cliente de id %s teve seus creditos adicionados em %.2f e está com %.2f de saldo" % (id, float(creditoAdicional), float(saldo[0]))
+    if request.method == "POST":
+      
+      creditoAdicional = request.form['creditoAdicional']
+      #fetchone retorna vetor msm se tiver apenas 1 item
+      saldo = adicionaCredito(id, creditoAdicional) 
+      session["mensagemCreditar"] = "O cliente de id %s teve seus creditos adicionados em %.2f e está com %.2f de saldo" % (id, float(creditoAdicional), float(saldo[0]))
 
-  return redirect('/read/clientes')
+    return redirect('/read/clientes')
 
 @app.route('/delete/cliente/<idApagado>', methods=['POST', 'GET'])
 def excluiCliente(idApagado):
