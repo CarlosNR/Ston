@@ -26,6 +26,7 @@ def index():
 
 @app.route('/read/cliente/logout', methods=['POST', 'GET'])
 def logout():
+
     if("idLogado" in session):
         del session["idLogado"]
         del session["nomeLogado"]
@@ -178,7 +179,7 @@ def listaJogos():
       return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos, mensagem=mensagem)
       
     listaJogos = achaJogos()
-    if "mensagemErroDeleteJogo" in session:
+    if("mensagemErroDeleteJogo" in session):
       mensagemErroDeleteJogo = session["mensagemErroDeleteJogo"]
       del session["mensagemErroDeleteJogo"]
       return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos, mensagemErroDeleteJogo=mensagemErroDeleteJogo)
@@ -187,12 +188,21 @@ def listaJogos():
 
 @app.route('/read/jogo')
 def readJogo1():
-    return render_template('/public/jogos/listaJogo.html')
+
+    if("idLogado" in session):
+      dadosLogado = []
+      dadosLogado.append(session["idLogado"])
+      dadosLogado.append(session["nomeLogado"])
+      dadosLogado.append(session["creditoLogado"])
+    else:
+      dadosLogado = False
+
+    return render_template('/public/jogos/listaJogo.html', dadosLogado=dadosLogado)
 
 @app.route('/read/jogo', methods=['POST', 'GET'])
 def readJogo2():
 
-    if ("idLogado" in session):
+    if("idLogado" in session):
       dadosLogado = []
       dadosLogado.append(session["idLogado"])
       dadosLogado.append(session["nomeLogado"])
