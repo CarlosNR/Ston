@@ -13,11 +13,11 @@
     <pre>
         O cliente de id: {{dadosLogin.0}}
         Se chama: {{dadosLogin.1}}
-        E tem de saldo: {{dadosLogin.3}}
-{% if compras %}
+        Tem de saldo: {{dadosLogin.3}}
+{% if nomeJogos %}
     E realizou as seguintes compras:
-    {% for compra in compras %}
-        {{compra}}
+    {% for nomeJogo in nomeJogos %}
+        {{nomeJogo}}
         {% endfor %}
     {% else %}
         Porém ainda não realizou nenhuma compra.

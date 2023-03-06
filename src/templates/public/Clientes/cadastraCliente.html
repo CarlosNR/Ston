@@ -2,7 +2,7 @@
     
 {% block content %}
 {% if dados %}
-    Cadastro concluído com sucesso, seu id é {{dados.0}} será teu login e sua data de nascimento a tua senha.
+    Cadastro concluído com sucesso, seu id é {{dados.0}} que servirá como teu login e tua data de nascimento é a tua senha.
     {% endif %}
     
 <form action="/insert/cliente" method="POST">

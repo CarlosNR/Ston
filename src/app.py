@@ -59,9 +59,17 @@ def readCliente2():
 
     id = request.form['id']
     dadosLogin = achaCliente(id)
-    if (dadosLogin != None):
+    nomeJogos = []
+    if (dadosLogin):
       compras = achaCompras(id)
-      return render_template('/public/clientes/listaCliente.html', dadosLogin=dadosLogin, compras=compras)
+      for compra in compras:
+        jogo = achaJogoId(compra[2])
+        nomeJogos.append(jogo[1])
+
+      print()
+      print(nomeJogos)
+      print()
+      return render_template('/public/clientes/listaCliente.html', dadosLogin=dadosLogin, nomeJogos=nomeJogos)
     else:
       nenhum = True
       return render_template('/public/clientes/listaCliente.html', nenhum=nenhum)
@@ -127,24 +135,31 @@ def jogo1():
 @app.route('/insert/jogo', methods=['POST', 'GET'])
 def insereJogo1():
  
-  session["nome"] = request.form['nome']
-  nome = session["nome"]
+  session["nomeJogo"] = request.form['nome']
   session["publicadora"] = request.form['publicadora']
   session["maior18"] = request.form['maior18']
   session["genero"] = request.form['genero']
   session["preco"] = request.form['preco']
 
-  if (achaJogoNome(nome)):
+  if (achaJogoNome(session["nomeJogo"])):
     mensagem = "Jogo com nome identico já incluso, cadastro falhou."
     return render_template('/public/jogos/cadastrajogo1.html', mensagem=mensagem)
 
   else:
-    repetidos = achaJogoNomeParecido(nome) 
+    repetidos = achaJogoNomeParecido(session["nomeJogo"]) 
     
     if (repetidos):
-      return render_template('/public/jogos/cadastrajogo2.html', repetidos=repetidos, )
+      return render_template('/public/jogos/cadastrajogo2.html', repetidos=repetidos)
     else:
       mensagem = "Jogo cadastrado com sucesso."
+      insereJogo(session["nomeJogo"], session["publicadora"], session["maior18"], session["genero"], session["preco"])  
+
+      del session["nomeJogo"]
+      del session["publicadora"]
+      del session["maior18"]
+      del session["genero"]
+      del session["preco"]
+
       return render_template('/public/jogos/cadastrajogo1.html', mensagem=mensagem)
 
 @app.route('/insert/jogo/pt2')
@@ -154,16 +169,16 @@ def jogo2():
 @app.route('/insert/jogo/pt2', methods=['POST', 'GET'])
 def cadastraJogos():
 
-  nome = session["nome"]
+  nomeJogo = session["nomeJogo"]
   publicadora = session["publicadora"]
   maior18 = session["maior18"]
   genero = session["genero"]
   preco = session["preco"]
 
-  insereJogo(nome, publicadora, maior18, genero, preco)  
+  insereJogo(nomeJogo, publicadora, maior18, genero, preco)  
   mensagem = "Jogo cadastrado com sucesso."
 
-  del session["nome"]
+  del session["nomeJogo"]
   del session["publicadora"]
   del session["maior18"]
   del session["genero"]
@@ -278,9 +293,10 @@ def cadastraCompra(idJogo,nomeJogo,preco):
     result = insereCompra(session["idLogado"], idJogo, date.today())
 
     if (result):
-      
-      session["creditoLogado"] = result
       mensagemCompraSucesso = True
+      
+      session["creditoLogado"] = result[0]
+      dadosLogado[2] = (session["creditoLogado"])
 
       return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], nomeJogo=nomeJogo, mensagemCompraSucesso=mensagemCompraSucesso, dadosLogado=dadosLogado)
   
