@@ -27,16 +27,20 @@
     Nenhum game cadastrado com este nome.
     {% else %}
         {% for jogo in jogos %}
-        <pre>Id: {{jogo.0}} </pre>
-        <pre>Nome: {{jogo.1}} </pre>
-        <pre>Publicadora: {{jogo.2}}</pre>
-        <pre>Maior18: {{jogo.3}}</pre>
-        <pre>Genero: {{jogo.4}}</pre>
-        <pre>Preço: {{jogo.5}}</pre>
-        <form action="/insert/compra/{{jogo.0}}/{{jogo.1}}/{{jogo.5}}" method="POST">
-            <button>Comprar</button>
-        </form>
-            {% endfor %}
+            <pre>Id: {{jogo.0}} </pre>
+            <pre>Nome: {{jogo.1}} </pre>
+            <pre>Publicadora: {{jogo.2}}</pre>
+            <pre>Maior18: {{jogo.3}}</pre>
+            <pre>Genero: {{jogo.4}}</pre>
+            <pre>Preço: {{jogo.5}}</pre>
+            {% if jogo.0 in listaComprados %}    
+                <p>Game já adquirido</p>
+            {% else %}
+                <form action="/insert/compra/{{jogo.0}}/{{jogo.1}}/{{jogo.5}}" method="POST">
+                    <button>Comprar</button>
+                </form>
+            {% endif %}
+        {% endfor %}
         {% endif %}
     {% else%}
         {% if nada %}

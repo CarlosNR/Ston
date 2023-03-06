@@ -172,6 +172,7 @@ def cadastraJogos():
 
 @app.route('/read/jogos')
 def listaJogos():
+
     if("mensagemPrecificar" in session):
       mensagem = session["mensagemPrecificar"]  
       del session["mensagemPrecificar"]
@@ -194,6 +195,7 @@ def readJogo1():
       dadosLogado.append(session["idLogado"])
       dadosLogado.append(session["nomeLogado"])
       dadosLogado.append(session["creditoLogado"])
+
     else:
       dadosLogado = False
 
@@ -207,16 +209,23 @@ def readJogo2():
       dadosLogado.append(session["idLogado"])
       dadosLogado.append(session["nomeLogado"])
       dadosLogado.append(session["creditoLogado"])
+
+      comprados = achaCompras(session["idLogado"])
+      listaComprados = []
+
+      for comprado in comprados:
+          listaComprados.append(comprado[2])
+
     else:
       dadosLogado = False
 
     nome = request.form['nome']
     jogos = achaJogoNomeParecido(nome)    
     if (jogos):
-      return render_template('/public/jogos/listaJogo.html', jogos=jogos, dadosLogado=dadosLogado)
+      return render_template('/public/jogos/listaJogo.html', jogos=jogos, dadosLogado=dadosLogado, listaComprados=listaComprados)
     else:
       nada=True
-      return render_template('/public/jogos/listaJogo.html', nada=nada, dadosLogado=dadosLogado)
+      return render_template('/public/jogos/listaJogo.html', nada=nada, dadosLogado=dadosLogado, listaComprados=listaComprados)
       
 @app.route('/update/jogo/preco/<int:id>', methods=['POST', 'GET'])
 def precificar1(id):
@@ -248,6 +257,12 @@ def excluiJogo(idApagado):
 #compras
 @app.route('/insert/compra/<int:idJogo>/<string:nomeJogo>/<float:preco>', methods=['POST', 'GET'])
 def cadastraCompra(idJogo,nomeJogo,preco):
+    
+    if("idLogado" in session):
+      dadosLogado = []
+      dadosLogado.append(session["idLogado"])
+      dadosLogado.append(session["nomeLogado"])
+      dadosLogado.append(session["creditoLogado"])
 
     result = insereCompra(session["idLogado"], idJogo, date.today())
 
@@ -256,8 +271,8 @@ def cadastraCompra(idJogo,nomeJogo,preco):
       session["creditoLogado"] = result
       mensagemCompraSucesso = True
 
-      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], nomeJogo=nomeJogo, mensagemCompraSucesso=mensagemCompraSucesso)
+      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], nomeJogo=nomeJogo, mensagemCompraSucesso=mensagemCompraSucesso, dadosLogado=dadosLogado)
   
     else:
 
-      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = "Saldo insuficiente para comprar este game.")
+      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = "Saldo insuficiente para comprar este game.", dadosLogado=dadosLogado)
