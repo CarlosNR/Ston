@@ -68,6 +68,7 @@ def readCliente2():
 
 @app.route('/read/clientes')
 def listaClientes():
+
     if("mensagemCreditar" in session):
       mensagem = session["mensagemCreditar"]  
       del session["mensagemCreditar"]
@@ -259,10 +260,20 @@ def excluiJogo(idApagado):
 def cadastraCompra(idJogo,nomeJogo,preco):
     
     if("idLogado" in session):
+      
       dadosLogado = []
       dadosLogado.append(session["idLogado"])
       dadosLogado.append(session["nomeLogado"])
       dadosLogado.append(session["creditoLogado"])
+
+      comprados = achaCompras(session["idLogado"])
+      listaComprados = []
+
+      for comprado in comprados:
+          if(idJogo == comprado[2]):
+            
+              mensagemCompraFalha = "Compra não realizada: cliente já passui o jogo em sua lista de compras."
+              return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
 
     result = insereCompra(session["idLogado"], idJogo, date.today())
 
@@ -275,4 +286,5 @@ def cadastraCompra(idJogo,nomeJogo,preco):
   
     else:
 
-      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = "Saldo insuficiente para comprar este game.", dadosLogado=dadosLogado)
+      mensagemCompraFalha = "Saldo insuficiente para comprar este game."
+      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
