@@ -1,2 +1,4 @@
 terminal.txt
 stonEnv
+flask_session
+__pycache__
