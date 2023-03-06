@@ -63,7 +63,7 @@ def achaClientes():
     try:
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
-        cursor.execute("select * from clientes;")
+        cursor.execute("select * from clientes order by id;")
         return cursor.fetchall()
 
     except psycopg2.DatabaseError as error:
@@ -175,10 +175,8 @@ def achaJogos():
     try:
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
-        #caso deleteJogo não puder deletar, permite outras transações no banco
-        cursor.execute("ROLLBACK")
-        conn.commit()
-        cursor.execute("select * from jogos;")
+
+        cursor.execute("select * from jogos order by nome;")
         return cursor.fetchall()
         
     except psycopg2.DatabaseError as error:

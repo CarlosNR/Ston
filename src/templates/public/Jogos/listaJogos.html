@@ -10,23 +10,25 @@
     <p>{{mensagemDeleteJogo}}</p>
     {% endif %}
 
-{% for jogo in listaJogos %}
-    <br>
-    <pre>Id: {{jogo.0}} </pre>
-    <form action="/delete/jogo/{{jogo.0}}" method="POST">
-        <button>Deletar</button>
-    </form>
-    <pre>Nome: {{jogo.1}} </pre>
-    <pre>Publicadora: {{jogo.2}}</pre>
-    <pre>Maior18: {{jogo.3}}</pre>
-    <pre>Genero: {{jogo.4}}</pre>
-    <pre>Preço: {{jogo.5}}</pre>
-    <form action="/update/jogo/preco/{{jogo.0}}" method="POST">
-        <button>Atualizar preço</button>
-    </form>
+{% if listaJogos %}
+    {% for jogo in listaJogos %}
+        <br>
+        <p>Id: {{jogo.0}} </p>
+        <form action="/delete/jogo/{{jogo.0}}" method="POST">
+            <button>Deletar</button>
+        </form>
+        <p>Nome: {{jogo.1}} </p>
+        <p>Publicadora: {{jogo.2}}</p>
+        <p>Maior18: {{jogo.3}}</p>
+        <p>Genero: {{jogo.4}}</p>
+        <p>preço: {{jogo.5}}</p>
+        <form action="/update/jogo/pco/{{jogo.0}}" method="POST">
+            <button>Atualizar preço</button>
+        </form>
 
-        {% else %}
-        Não há jogos cadastrados ainda.
     {% endfor %}
-
+{% else %}
+    <p>Não há jogos cadastrados ainda.</p>
+{% endif %}    
+    
 {% endblock %}

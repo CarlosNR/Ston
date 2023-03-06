@@ -189,13 +189,13 @@ def cadastraJogos():
 @app.route('/read/jogos')
 def listaJogos():
 
+    listaJogos = achaJogos()
+
     if("mensagemPrecificar" in session):
       mensagem = session["mensagemPrecificar"]  
       del session["mensagemPrecificar"]
-      listaJogos = achaJogos()
       return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos, mensagem=mensagem)
       
-    listaJogos = achaJogos()
     if("mensagemErroDeleteJogo" in session):
       mensagemErroDeleteJogo = session["mensagemErroDeleteJogo"]
       del session["mensagemErroDeleteJogo"]
