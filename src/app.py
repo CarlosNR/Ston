@@ -44,9 +44,16 @@ def cadastraClientes():
 
     nome = request.form['nome']
     nascimento = request.form['nascimento']
+    
     credito = request.form['credito']
+    senha = request.form['senha']
+    email = request.form['email']
 
-    dados = insereCliente(nome, nascimento, credito)
+    print()
+    print(nascimento)
+    print()
+
+    dados = insereCliente(nome, nascimento, credito, senha, email)
 
     return render_template('/public/clientes/cadastraCliente.html', dados=dados)
 
