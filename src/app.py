@@ -69,14 +69,13 @@ def readCliente2():
     nomeJogos = []
     if (dadosLogin):
       compras = achaCompras(id)
-      for compra in compras:
-        jogo = achaJogoId(compra[2])
-        nomeJogos.append(jogo[1])
-
-      print()
-      print(nomeJogos)
-      print()
-      return render_template('/public/clientes/listaCliente.html', dadosLogin=dadosLogin, nomeJogos=nomeJogos)
+      if(compras):
+        for compra in compras:
+          jogo = achaJogoId(compra[2])
+          nomeJogos.append(jogo[1])
+        return render_template('/public/clientes/listaCliente.html', dadosLogin=dadosLogin, nomeJogos=nomeJogos)
+      else:
+        return render_template('/public/clientes/listaCliente.html', dadosLogin=dadosLogin)
     else:
       nenhum = True
       return render_template('/public/clientes/listaCliente.html', nenhum=nenhum)

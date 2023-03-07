@@ -11,7 +11,8 @@
 {% if dadosLogin %}
     <p>O cliente de id: {{dadosLogin.0}}</p>
     <p>Se chama: {{dadosLogin.1}}</p>
-    <p>Tem de saldo: {{dadosLogin.2}}</p>
+    <p>Nasceu em: {{dadosLogin.2.strftime('%d-%m-%Y')}}</p>
+    <p>Tem de saldo: {{dadosLogin.3}}</p>
     <p>Email: {{dadosLogin.5}}</p>
 {% if nomeJogos %}
     <p>E realizou as seguintes compras:</p>
