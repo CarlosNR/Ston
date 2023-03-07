@@ -1,5 +1,6 @@
 <head>
     <script defer src="{{ url_for('static', filename='js/validaCadastroClienteEmail.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/validaCadastroClienteNome.js') }}"></script>
 </head>
 
 {% extends "base.html" %}
@@ -12,7 +13,7 @@
     {% endif %}
 
 <form name="formCadastroCliente" action="/insert/cliente" method="POST">
-    <input type="text" name="nome" placeholder="Nome completo">
+    <input type="text" name="nome" placeholder="Nome completo" onfocusout="validarCadastroClienteNome()">
     <input type="text" name="nascimento" placeholder="dd/mm/aaaa">
     <input type="number" name="credito" placeholder="Credito inicial: 0.00" step="0.1" min="0.00">
     <input type="password" name="senha" placeholder="******">
@@ -20,8 +21,5 @@
 
     <button type="submit">Cadastrar</button>
 </form>
-
-<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-<script src="{{ url_for('static', filename='js/validaCpf.js') }}"></script>
 
 {% endblock %}

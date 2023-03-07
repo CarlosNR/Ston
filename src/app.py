@@ -57,24 +57,6 @@ def cadastraClientes():
 
     return render_template('/public/clientes/cadastraCliente.html', dados=dados)
 
-@app.route('/insert/cliente/valida/email', methods=['GET', 'POST'])
-def validaEmail():
-
-  if request.method == "POST":
-    email = request.get_json()['email'].strip()
-    
-    resp = achaClienteEmail(email)
-    print()
-    print(email)
-    print()
-    print()
-    print(resp)
-    print()
-    if (resp):
-      return jsonify({"emailRepetido": "true"})
-    else:
-      return jsonify({"emailRepetido": "false"})
-
 @app.route('/read/cliente')
 def readCliente1():
     return render_template('/public/clientes/listaCliente.html')
@@ -297,7 +279,7 @@ def excluiJogo(idApagado):
     session["mensagemErroDeleteJogo"] = "Jogo não pode ser apagado pois alguem já comprou."
     return redirect('/read/jogos')
 
-#compras
+#Compras
 @app.route('/insert/compra/<int:idJogo>/<string:nomeJogo>/<float:preco>', methods=['POST', 'GET'])
 def cadastraCompra(idJogo,nomeJogo,preco):
     
@@ -331,3 +313,16 @@ def cadastraCompra(idJogo,nomeJogo,preco):
 
       mensagemCompraFalha = "Saldo insuficiente para comprar este game."
       return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
+
+#Validadores
+@app.route('/insert/cliente/valida/email', methods=['GET', 'POST'])
+def validaEmail():
+
+  if request.method == "POST":
+    email = request.get_json()['email'].strip()
+    
+    resp = achaClienteEmail(email)
+    if (resp):
+      return jsonify({"emailRepetido": "true"})
+    else:
+      return jsonify({"emailRepetido": "false"})

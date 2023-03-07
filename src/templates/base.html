@@ -7,10 +7,13 @@
     <title>Flask 2023</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <!-- Axios para verificação de campo do form-->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 </head>
 <body>
     {% block content %}
     
     {% endblock %}
+
 </body>
 </html>
