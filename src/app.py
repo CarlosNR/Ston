@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect
+from flask import Flask, request, render_template, session, redirect, jsonify
 from flask_session import Session
 from src.db import *
 from datetime import date
@@ -56,6 +56,24 @@ def cadastraClientes():
     dados = insereCliente(nome, nascimento, credito, senha, email)
 
     return render_template('/public/clientes/cadastraCliente.html', dados=dados)
+
+@app.route('/insert/cliente/valida/email', methods=['GET', 'POST'])
+def validaEmail():
+
+  if request.method == "POST":
+    email = request.get_json()['email'].strip()
+    
+    resp = achaClienteEmail(email)
+    print()
+    print(email)
+    print()
+    print()
+    print(resp)
+    print()
+    if (resp):
+      return jsonify({"emailRepetido": "true"})
+    else:
+      return jsonify({"emailRepetido": "false"})
 
 @app.route('/read/cliente')
 def readCliente1():

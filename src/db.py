@@ -89,7 +89,23 @@ def achaCliente(id):
     finally:
         cursor.close()
         conn.close
-        
+
+def achaClienteEmail(email):
+    try:
+        conn = psycopg2.connect(conn_string)
+        cursor = conn.cursor()
+
+        cursor.execute("select * from clientes where email=%s;",(email, ))
+        return cursor.fetchone()
+
+    except psycopg2.DatabaseError as error:
+        cursor.execute("ROLLBACK")
+        conn.commit()
+
+    finally:
+        cursor.close()
+        conn.close
+
 def login(email, senha):
     try:
         conn = psycopg2.connect(conn_string)
