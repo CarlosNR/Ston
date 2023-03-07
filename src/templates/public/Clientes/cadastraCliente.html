@@ -2,13 +2,16 @@
     
 {% block content %}
 {% if dados %}
-    Cadastro concluído com sucesso, seu id é {{dados.0}} que servirá como teu login e tua data de nascimento é a tua senha.
+    <p>Cadastro concluído com sucesso, e tu és nosso {{dados.0}}º cliente!</p>
+    {% else %}
+    <p>{{jaCadastrado}}</p>
     {% endif %}
-    
 <form action="/insert/cliente" method="POST">
     <input type="text" name="nome" placeholder="Nome completo">
     <input type="date" name="nascimento" placeholder="Data de nascimento">
     <input type="number" name="credito" placeholder="Credito inicial: 0.00" step="0.1" min="0.00">
+    <input type="password" name="senha" placeholder="******">
+    <input type="text" name="email" placeholder="exemplo@exemplo.com">
 
     <button type="submit">Cadastrar</button>
 </form>

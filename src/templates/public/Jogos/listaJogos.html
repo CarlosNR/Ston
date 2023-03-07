@@ -19,7 +19,11 @@
         </form>
         <p>Nome: {{jogo.1}} </p>
         <p>Publicadora: {{jogo.2}}</p>
-        <p>Maior18: {{jogo.3}}</p>
+        {% if jogo.3 %}
+                <p>Maior18: Sim<p/p>
+            {% else %}
+                <p>Maior18: Não</p> 
+        {% endif %}
         <p>Genero: {{jogo.4}}</p>
         <p>preço: {{jogo.5}}</p>
         <form action="/update/jogo/preco/{{jogo.0}}" method="POST">

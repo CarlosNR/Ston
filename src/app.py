@@ -93,9 +93,9 @@ def login1():
 @app.route('/read/cliente/login', methods=['POST', 'GET'])
 def login2():
 
-    id = request.form['id']
-    nascimento = request.form['nascimento']
-    dados = login(id, nascimento)
+    email = request.form['email']
+    senha = request.form['senha']
+    dados = login(email, senha)
     if (dados):
       session["idLogado"] = dados[0]
       session["nomeLogado"] = dados[1]
@@ -229,8 +229,10 @@ def readJogo2():
       comprados = achaCompras(session["idLogado"])
       listaComprados = []
 
-      for comprado in comprados:
-          listaComprados.append(comprado[2])
+      if(comprados):
+
+        for comprado in comprados:
+            listaComprados.append(comprado[2])
 
     else:
       dadosLogado = False

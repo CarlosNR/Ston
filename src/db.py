@@ -10,12 +10,12 @@ password = "001100"
 conn_string = "host={0} user={1} dbname={2} password={3}".format(host,user,dbname,password)
 
 #CLIENTES
-def insereCliente(nome, nascimento, credito):
+def insereCliente(nome, nascimento, credito, senha, email):
     try:
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
 
-        cursor.execute("insert into clientes (nome, nascimento, credito) values (%s, %s, %s) returning id;",(nome, nascimento, credito))
+        cursor.execute("insert into clientes (nome, nascimento, credito, senha, email) values (%s, %s, %s, %s, %s) returning id;",(nome, nascimento, credito, senha, email))
         conn.commit()
 
         return cursor.fetchone()
@@ -90,12 +90,12 @@ def achaCliente(id):
         cursor.close()
         conn.close
         
-def login(id, nascimento):
+def login(email, senha):
     try:
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
 
-        cursor.execute("select * from clientes where (id=%s and nascimento=%s);",(id, nascimento))
+        cursor.execute("select * from clientes where (email=%s and senha=%s);",(email, senha))
         return cursor.fetchone()
 
     except psycopg2.DatabaseError as error:

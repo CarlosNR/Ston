@@ -9,23 +9,23 @@
 </form>
 
 {% if dadosLogin %}
-
-    <pre>
-        O cliente de id: {{dadosLogin.0}}
-        Se chama: {{dadosLogin.1}}
-        Tem de saldo: {{dadosLogin.3}}
+    <p>O cliente de id: {{dadosLogin.0}}</p>
+    <p>Se chama: {{dadosLogin.1}}</p>
+    <p>Tem de saldo: {{dadosLogin.2}}</p>
+    <p>Email: {{dadosLogin.5}}</p>
 {% if nomeJogos %}
-    E realizou as seguintes compras:
+    <p>E realizou as seguintes compras:</p>
     {% for nomeJogo in nomeJogos %}
-        {{nomeJogo}}
+        <p>{{nomeJogo}}</p>
         {% endfor %}
     {% else %}
-        Porém ainda não realizou nenhuma compra.
-        Não perca tempo, compre seus games na Ston!
+        <p>
+            Porém ainda não realizou nenhuma compra.
+            Não perca tempo, compre seus games na Ston!
+        </p>
     {% endif %}
     {% elif nenhum == True %}
-        Cliente solicitado não está cadastrado.
-    </pre>
+        <p>Cliente solicitado não está cadastrado.</p>
     {% endif %}
 
 {% endblock %}

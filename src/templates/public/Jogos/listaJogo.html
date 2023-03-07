@@ -16,46 +16,61 @@
     <p>Compra realizada com sucesso:<br> {{nomeJogo}} foi adicionado a tua lista de jogos!</p>
     {% endif %}
 
-<form action="/read/jogo" method="POST">
-    <label for="nome">Insira nome do jogo:</label>
-    <input name="nome" type="text">
-    <button>Pesquisar</button>
-</form>
-
-{% if dadosLogado %}
-    {% if nada %}
-    Nenhum game cadastrado com este nome.
+{% if listaJogosVazia %}    
+    <p>{{listaJogosVazia}}</p>
+    <form action="/read/jogo" method="POST">
+        <label for="nome">Insira nome do jogo:</label>
+        <input name="nome" type="text">
+        <button>Pesquisar</button>
+    </form>
     {% else %}
-        {% for jogo in jogos %}
-            <pre>Id: {{jogo.0}} </pre>
-            <pre>Nome: {{jogo.1}} </pre>
-            <pre>Publicadora: {{jogo.2}}</pre>
-            <pre>Maior18: {{jogo.3}}</pre>
-            <pre>Genero: {{jogo.4}}</pre>
-            <pre>Preço: {{jogo.5}}</pre>
-            {% if jogo.0 in listaComprados %}    
-                <p>Game já adquirido</p>
-            {% else %}
-                <form action="/insert/compra/{{jogo.0}}/{{jogo.1}}/{{jogo.5}}" method="POST">
-                    <button>Comprar</button>
-                </form>
-            {% endif %}
-        {% endfor %}
-        {% endif %}
-    {% else%}
-        {% if nada %}
-            Nenhum game cadastrado com este nome.
+        <form action="/read/jogo" method="POST">
+            <label for="nome">Insira nome do jogo:</label>
+            <input name="nome" type="text">
+            <button>Pesquisar</button>
+        </form>
+        
+        {% if dadosLogado %}
+            {% if nada %}
+            <p>Nenhum game cadastrado com este nome.</p>
             {% else %}
                 {% for jogo in jogos %}
-                <pre>Id: {{jogo.0}} </pre>
-                <pre>Nome: {{jogo.1}} </pre>
-                <pre>Publicadora: {{jogo.2}}</pre>
-                <pre>Maior18: {{jogo.3}}</pre>
-                <pre>Genero: {{jogo.4}}</pre>
-                <pre>Preço: {{jogo.5}}</pre>
-                    {% endfor %}
+                    <p>Id: {{jogo.0}} </p>
+                    <p>Nome: {{jogo.1}} </p>
+                    <p>Publicadora: {{jogo.2}}</p>
+                    <p>Maior18: {{jogo.3}}</p>
+                    <p>Genero: {{jogo.4}}</p>
+                    <p>Preço: {{jogo.5}}</p>
+                    {% if jogo.0 in listaComprados %}    
+                        <p>Game já adquirido</p>
+                    {% else %}
+                        <form action="/insert/compra/{{jogo.0}}/{{jogo.1}}/{{jogo.5}}" method="POST">
+                            <button>Comprar</button>
+                        </form>
+                    {% endif %}
+                {% endfor %}
                 {% endif %}
+            {% else%}
+                {% if nada %}
+                    Nenhum game cadastrado com este nome.
+                    {% else %}
+                        {% for jogo in jogos %}
+                        <p>Id: {{jogo.0}} </p>
+                        <p>Nome: {{jogo.1}} </p>
+                        <p>Publicadora: {{jogo.2}}</p>
+                        {% if jogo.3 %}
+                            <p>Maior18: Sim</p>
+                        {% else %}
+                            <p>Maior18: Sim</p> 
+                        {% endif %}
+                        <p>Genero: {{jogo.4}}</p>
+                        <p>Preço: {{jogo.5}}</p>
+                            {% endfor %}
+                        {% endif %}
+            {% endif %}
     {% endif %}
+
+
 
 
 {% endblock %}
