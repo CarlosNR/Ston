@@ -4,14 +4,13 @@
 }
 
 .navButton{
-    margin: 0 5px;
+    /* margin: 0 5px; */
     color: var(--amareloClaro);
-    text-decoration: none;
-    position: relative;
+    /* text-decoration: none; */
+    /* position: relative; */
     border-color: var(--amareloForte) !important;
     outline-color: var(--amareloForte) !important;
     color: var(--cinza) !important;
-
 }
 
 .navButton:hover{
@@ -40,6 +39,17 @@
 .offCanvasButton:hover{
     background-color: var(--amareloForte) !important;
     color: var(--cinza) !important;
+}
+
+.dropdown .nav-link{
+
+    background-color: var(--cinza) !important;
+    
+    }
+
+.nav-link{
+    padding: 0 !important;
+    margin: 5px !important;
 }
 
 @media (max-width: 991px) {

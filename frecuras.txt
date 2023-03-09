@@ -1,0 +1,11 @@
+bootstrap:
+    carregar css primeiro e js depois
+
+flask + post:
+    se query tem 1 variavel do python, terminar conjunto com virgula
+    cursor.execute("... where campo=%s;",(campo, ))
+
+    se query tem mais de 1 variavel do python, terminar conjunto com variavel
+    cursor.execute("... where campo=%s and cammpo2=%s;",(campo, campo2))
+
+
