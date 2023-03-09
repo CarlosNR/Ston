@@ -9,3 +9,6 @@ flask + post:
     cursor.execute("... where campo=%s and cammpo2=%s;",(campo, campo2))
 
 
+html:
+    colocar link css no head    
+    colocar script js no body (depois do conteudo)

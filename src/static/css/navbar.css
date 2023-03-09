@@ -41,15 +41,17 @@
     color: var(--cinza) !important;
 }
 
-.dropdown .nav-link{
-
-    background-color: var(--cinza) !important;
-    
-    }
-
 .nav-link{
     padding: 0 !important;
     margin: 5px !important;
+}
+
+.logoAzul{
+    margin-left: 22px !important;
+}
+
+.navbar-toggler{
+    margin-right: 9px !important;
 }
 
 @media (max-width: 991px) {
@@ -58,4 +60,8 @@
         background-color: var(--azulForte) !important;
     }
 
+    .logoAzul{
+        margin-left: 10px !important;
+    }
+    
 }

@@ -1,11 +1,3 @@
-<head>
-    <script defer src="{{ url_for('static', filename='js/validaCadastroClienteEmail.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='js/validaCadastroClienteNome.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='js/validaCadastroClienteData.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='js/validaCadastroClienteCredito.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='js/validaCadastroClienteSenha.js') }}"></script>
-</head>
-
 {% extends "base.html" %}
     
 {% block content %}
@@ -25,4 +17,10 @@
     <button type="submit">Cadastrar</button>
 </form>
 
+<!-- Validadores -->
+<script defer src="{{ url_for('static', filename='js/validaCadastroClienteEmail.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaCadastroClienteNome.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaCadastroClienteData.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaCadastroClienteCredito.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaCadastroClienteSenha.js') }}"></script>
 {% endblock %}
