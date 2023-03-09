@@ -16,6 +16,7 @@ const validarCadastroClienteEmail = async () => {
     const email = emailFormElement.value
     
     respJs = validarEmail(email, emailFormElement)
+    
     if(respJs){
         axios.post('/insert/cliente/valida/email', {
             email: email

@@ -1,0 +1,51 @@
+.navBar{
+    background-color: var(--azulClaro) !important;
+    color: var(--amareloForte) !important;
+}
+
+.navButton{
+    margin: 0 5px;
+    color: var(--amareloClaro);
+    text-decoration: none;
+    position: relative;
+    border-color: var(--amareloForte) !important;
+    outline-color: var(--amareloForte) !important;
+    color: var(--cinza) !important;
+
+}
+
+.navButton:hover{
+    background-color: var(--amareloForte) !important;
+    color: var(--cinza) !important;
+}
+
+.offCanvasHead{
+    background-color: var(--amareloForte) !important;
+    height: 10vh !important;
+}
+
+.offCanvasBody{
+    background-color: var(--azulClaro) !important;
+}
+
+.offCanvasButton{
+    padding: 0;
+    margin: 5px 0;
+    width: 100%;
+    height: 8%;
+    color: var(--amareloClaro) !important;
+    border-color: var(--amareloClaro) !important;
+}
+
+.offCanvasButton:hover{
+    background-color: var(--amareloForte) !important;
+    color: var(--cinza) !important;
+}
+
+@media (max-width: 991px) {
+    
+    .offCanvasBody{
+        background-color: var(--azulForte) !important;
+    }
+
+}

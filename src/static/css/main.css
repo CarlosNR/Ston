@@ -1,0 +1,14 @@
+:root{
+    --azulClaro:rgb(75, 139, 190);
+    --azulForte:rgb(48, 105, 152);
+    --amareloClaro:rgb(255, 232, 115);
+    --amareloForte:rgb(255, 212, 59);
+    /* original: 100 100 100 */
+    --cinza:rgb(70, 70, 70);
+}
+
+body{
+    background-color: var(--amareloClaro) !important; 
+    color: var(--cinza) !important;
+}
+
