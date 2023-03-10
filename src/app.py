@@ -227,7 +227,8 @@ def readJogo1():
 
 @app.route('/read/jogo', methods=['POST', 'GET'])
 def readJogo2():
-
+    
+    listaComprados = []
     if("idLogado" in session):
       dadosLogado = []
       dadosLogado.append(session["idLogado"])
@@ -235,7 +236,6 @@ def readJogo2():
       dadosLogado.append(session["creditoLogado"])
 
       comprados = achaCompras(session["idLogado"])
-      listaComprados = []
 
       if(comprados):
 
@@ -284,36 +284,44 @@ def excluiJogo(idApagado):
 @app.route('/insert/compra/<int:idJogo>/<string:nomeJogo>/<float:preco>', methods=['POST', 'GET'])
 def cadastraCompra(idJogo,nomeJogo,preco):
     
+    if request.method == "POST":
+
+      if("idLogado" in session):
+      
+        dadosLogado = []
+        dadosLogado.append(session["idLogado"])
+        dadosLogado.append(session["nomeLogado"])
+        dadosLogado.append(session["creditoLogado"])
+
+        comprados = achaCompras(session["idLogado"])
+
+        if(comprados):
+          for comprado in comprados:
+            if(idJogo == comprados[2]):
+              mensagemCompraFalha = "Compra não realizada: cliente já passui o jogo em sua lista de compras."
+              return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
+
+        else:
+          result = insereCompra(session["idLogado"], idJogo, date.today())
+          mensagemCompraSucesso="%s foi inserido em tua lista de jogos!"
+          return render_template('/public/jogos/listaJogo.html', nomeJogo=nomeJogo,mensagemCompraSucesso=mensagemCompraSucesso, dadosLogado=dadosLogado)
+
+      else:
+        mensagemCompraFalha = "Para comprar um jogo é nescesario estar logado!"
+        return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
+
     if("idLogado" in session):
       
-      dadosLogado = []
-      dadosLogado.append(session["idLogado"])
-      dadosLogado.append(session["nomeLogado"])
-      dadosLogado.append(session["creditoLogado"])
+        dadosLogado = []
+        dadosLogado.append(session["idLogado"])
+        dadosLogado.append(session["nomeLogado"])
+        dadosLogado.append(session["creditoLogado"])
 
-      comprados = achaCompras(session["idLogado"])
-      listaComprados = []
-
-      for comprado in comprados:
-          if(idJogo == comprado[2]):
-            
-              mensagemCompraFalha = "Compra não realizada: cliente já passui o jogo em sua lista de compras."
-              return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
-
-    result = insereCompra(session["idLogado"], idJogo, date.today())
-
-    if (result):
-      mensagemCompraSucesso = True
-      
-      session["creditoLogado"] = result[0]
-      dadosLogado[2] = (session["creditoLogado"])
-
-      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], nomeJogo=nomeJogo, mensagemCompraSucesso=mensagemCompraSucesso, dadosLogado=dadosLogado)
-  
+        mensagemCompraFalha = "Compra não realizada: cliente já passui o jogo em sua lista de compras."
+        return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
     else:
-
-      mensagemCompraFalha = "Saldo insuficiente para comprar este game."
-      return render_template('/public/jogos/listaJogo.html', creditoLogado=session["creditoLogado"], nomeLogado=session["nomeLogado"], idLogado=session["idLogado"], mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
+        # Caso o espertinho entre pelo link mesmo sem ter botão disponivel
+        return render_template('/public/jogos/listaJogo.html')
 
 #Validadores
 @app.route('/insert/cliente/valida/email', methods=['GET', 'POST'])

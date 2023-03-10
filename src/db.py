@@ -275,19 +275,20 @@ def insereCompra(idCliente, idJogo, dataCompra):
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
 
-        dadoCliente = achaCliente(idCliente)
-        credito = dadoCliente[3]
-        dadoJogo = achaJogoId(idJogo)
-        preco = dadoJogo[5]
+        # dadoCliente = achaCliente(idCliente)
+        # credito = dadoCliente[3]
 
-        if (preco > credito):
-            return False
-        else:
-            atualizaClienteCredito(idCliente, preco)
-            cursor.execute("insert into compras (idcliente, idjogo, datacompra) values (%s, %s, %s);",(idCliente, idJogo, dataCompra))
-            conn.commit()
-            credito = achaClienteCredito(idCliente)
-            return credito
+        # dadoJogo = achaJogoId(idJogo)
+        # preco = dadoJogo[5]
+    
+        # atualizaClienteCredito(idCliente, preco)
+        # conn.commit()
+
+        cursor.execute("insert into compras (idcliente, idjogo, datacompra) values (%s, %s, %s);",(idCliente, idJogo, dataCompra))
+        conn.commit()
+
+        credito = achaClienteCredito(idCliente)
+        return credito
             
     except psycopg2.DatabaseError as error:
         cursor.execute("ROLLBACK")

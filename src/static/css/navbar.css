@@ -65,3 +65,20 @@
     }
     
 }
+
+@media (min-width: 992px){
+    /* Evita que submenus escapem da página */
+    .dropdown-menu-center{
+        left: 50% !important;
+        right: auto !important;
+        text-align: center !important;
+        transform: translate(-50%, 0) !important;
+    }
+    
+    .dropdown-menu-left{
+        right: 50% !important;
+        right: auto !important;
+        text-align: center !important;
+        transform: translate(-53%, 0) !important;
+    }
+}

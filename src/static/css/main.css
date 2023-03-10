@@ -12,3 +12,7 @@ body{
     color: var(--cinza) !important;
 }
 
+p{
+    text-align: center;
+}
+

@@ -29,29 +29,44 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <button class="btn dropdown-toggle offCanvasButton" type="button">Zona Cliente</button>
+                <button class="btn dropdown-toggle offCanvasButton" type="button">Zona Cliente:</button>
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#"></a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <ul class="dropdown-menu dropdown-menu-center">
+                <li> <p>Inclui operações que precisa estar logado</p> </li>
+                <li><hr class="dropdown-divider"></li>
+                {% if "idLogado" in session %}
+                  <li><a class="dropdown-item" href="/read/cliente/logout">Deslogar</a></li>
+                  <li><a class="dropdown-item" href="/read/jogo">Procurar game</a></li>
+
+                  {% else %}
+                    <li><a class="dropdown-item" href="/read/cliente/login">Login</a></li>
+                {% endif %}
               </ul>
             </li>
             
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <button class="btn dropdown-toggle offCanvasButton" type="button">Administrativo</button>
+                <button class="btn dropdown-toggle offCanvasButton" type="button">Administrativo: Cliente</button>
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <ul class="dropdown-menu dropdown-menu-left">
+                <li> <p>Acesso completo exceto login/logout</p> </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/read/clientes"><p>Listar clientes</p></a></li>
+                <li><a class="dropdown-item" href="/read/cliente"><p>Pesquisar por cliente</p></a></li>
+                <li><a class="dropdown-item" href="/insert/cliente"><p>Cadastra clientes</p></a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn dropdown-toggle offCanvasButton" type="button">Administrativo: Game</button>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-left">
+                <li> <p>Acesso completo exceto comprar jogos</p> </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/read/jogos"><p>Listar jogos</p></a></li>
+                <li><a class="dropdown-item" href="/read/jogo"><p>Pesquisar por jogo</p></a></li>
+                <li><a class="dropdown-item" href="/insert/jogos"><p>Cadastra jogo no sistema</p></a></li>
               </ul>
             </li>
             

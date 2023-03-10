@@ -17,7 +17,7 @@ create table if not exists jogos(
 
 );
 
-create table if not exists compra(
+create table if not exists compras(
     id serial primary key not null,
     idCliente smallint NULL REFERENCES clientes (id),
     idJogo smallint NULL REFERENCES jogos (id),
