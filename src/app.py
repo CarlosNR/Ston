@@ -86,10 +86,10 @@ def readCliente2():
 def listaClientes():
 
     if("mensagemCreditar" in session):
-      mensagem = session["mensagemCreditar"]  
+      mensagemCredita = session["mensagemCreditar"]  
       del session["mensagemCreditar"]
       listaClientes = achaClientes()
-      return render_template('/public/clientes/listaClientes.html', listaClientes=listaClientes, mensagem=mensagem)
+      return render_template('/public/clientes/listaClientes.html', listaClientes=listaClientes, mensagemCredita=mensagemCredita)
 
     listaClientes = achaClientes()
     return render_template('/public/clientes/listaClientes.html', listaClientes=listaClientes)
