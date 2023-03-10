@@ -143,8 +143,9 @@ def atualizaClienteCredito(id, preco):
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
 
-        cursor.execute("update clientes set credito = (credito-%s) where id = %s;",(preco, id))    
+        cursor.execute("update clientes set credito = (credito-%s) where id = %s returning credito;",(preco, id))    
         conn.commit()
+        return cursor.fetchone()
     
     except psycopg2.DatabaseError as error:
         cursor.execute("ROLLBACK")
@@ -272,24 +273,27 @@ def deletaJogo(id):
 #COMPRAS
 def insereCompra(idCliente, idJogo, dataCompra):
     try:
+
+        dadoCliente = achaCliente(idCliente)
+        credito = dadoCliente[3]
+
+        dadoJogo = achaJogoId(idJogo)
+        preco = dadoJogo[5]
+
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
 
-        # dadoCliente = achaCliente(idCliente)
-        # credito = dadoCliente[3]
+        if(credito >= preco):
 
-        # dadoJogo = achaJogoId(idJogo)
-        # preco = dadoJogo[5]
-    
-        # atualizaClienteCredito(idCliente, preco)
-        # conn.commit()
+            cursor.execute("insert into compras (idcliente, idjogo, datacompra) values (%s, %s, %s);",(idCliente, idJogo, dataCompra))
+            conn.commit()
 
-        cursor.execute("insert into compras (idcliente, idjogo, datacompra) values (%s, %s, %s);",(idCliente, idJogo, dataCompra))
-        conn.commit()
+            credito = atualizaClienteCredito(idCliente, preco)
+            conn.commit()
+            return credito
+        else:
+            return False
 
-        credito = achaClienteCredito(idCliente)
-        return credito
-            
     except psycopg2.DatabaseError as error:
         cursor.execute("ROLLBACK")
         conn.commit()

@@ -297,28 +297,19 @@ def cadastraCompra(idJogo,nomeJogo,preco):
 
         if(comprados):
           for comprado in comprados:
-            if(idJogo == comprados[2]):
+            if(idJogo == comprado[2]):
               mensagemCompraFalha = "Compra não realizada: cliente já passui o jogo em sua lista de compras."
               return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
-
-        else:
-          result = insereCompra(session["idLogado"], idJogo, date.today())
+        
+        result = insereCompra(session["idLogado"], idJogo, date.today())
+        if(result):
+          session['creditoLogado'] = result
           mensagemCompraSucesso="%s foi inserido em tua lista de jogos!"
           return render_template('/public/jogos/listaJogo.html', nomeJogo=nomeJogo,mensagemCompraSucesso=mensagemCompraSucesso, dadosLogado=dadosLogado)
+        else:
+          mensagemCompraFalha = "Compra não realizada: credito insuficiente."
+          return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
 
-      else:
-        mensagemCompraFalha = "Para comprar um jogo é nescesario estar logado!"
-        return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
-
-    if("idLogado" in session):
-      
-        dadosLogado = []
-        dadosLogado.append(session["idLogado"])
-        dadosLogado.append(session["nomeLogado"])
-        dadosLogado.append(session["creditoLogado"])
-
-        mensagemCompraFalha = "Compra não realizada: cliente já passui o jogo em sua lista de compras."
-        return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
     else:
         # Caso o espertinho entre pelo link mesmo sem ter botão disponivel
         return render_template('/public/jogos/listaJogo.html')
