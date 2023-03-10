@@ -302,17 +302,20 @@ def cadastraCompra(idJogo,nomeJogo,preco):
               return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
         
         result = insereCompra(session["idLogado"], idJogo, date.today())
+
         if(result):
-          session['creditoLogado'] = result
-          mensagemCompraSucesso="%s foi inserido em tua lista de jogos!"
+          session['creditoLogado'] = result[0]
+          dadosLogado[2]=(session["creditoLogado"])
+
+          mensagemCompraSucesso="%s foi inserido em tua lista de jogos!",(nomeJogo, )
           return render_template('/public/jogos/listaJogo.html', nomeJogo=nomeJogo,mensagemCompraSucesso=mensagemCompraSucesso, dadosLogado=dadosLogado)
         else:
           mensagemCompraFalha = "Compra não realizada: credito insuficiente."
           return render_template('/public/jogos/listaJogo.html', mensagemCompraFalha = mensagemCompraFalha, dadosLogado=dadosLogado)
-
+ 
     else:
         # Caso o espertinho entre pelo link mesmo sem ter botão disponivel
-        return render_template('/public/jogos/listaJogo.html')
+        return render_template('/public/jogos/listaJogo.html', dadosLogado=False)
 
 #Validadores
 @app.route('/insert/cliente/valida/email', methods=['GET', 'POST'])
