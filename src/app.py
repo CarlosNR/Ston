@@ -112,10 +112,10 @@ def login2():
     else:
       return render_template('/public/clientes/logaCliente.html', nenhum=True)
 
-@app.route('/update/cliente/credito/<int:id>', methods=['POST', 'GET'])
-def creditar1(id):
+@app.route('/update/cliente/credito/<int:id>/<float:saldoAntigo>', methods=['POST', 'GET'])
+def creditar1(id, saldoAntigo):
 
-     return render_template('/public/clientes/credita.html', id=id)
+     return render_template('/public/clientes/credita.html', id=id, saldoAntigo=saldoAntigo)
 
 @app.route('/update/cliente/credito/<int:id>/valor', methods=['POST', 'GET'])
 def creditar2(id):

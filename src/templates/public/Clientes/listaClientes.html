@@ -6,8 +6,8 @@
     O cliente de id {{idApagado}} foi removido com sucesso.
     {% endif %}
 
-{% if mensagem %}
-    <p>{{mensagem}}</p>
+{% if mensagemCreditado %}
+    <p>{{mensagemCreditado}}</p>
     {% endif %}
 
 {% for cliente in listaClientes %}
@@ -20,7 +20,7 @@
     <p>Nascimento {{cliente.2.strftime('%d/%m/%Y')}}</p>
     <p>Credito atual: {{cliente.3}}</p>
     <p>Email: {{cliente.5}}</p>
-    <form action="/update/cliente/credito/{{cliente.0}}" method="POST">
+    <form action="/update/cliente/credito/{{cliente.0}}/{{cliente.3}}" method="POST">
         <button>Creditar</button>
     </form>
 

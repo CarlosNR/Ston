@@ -7,7 +7,8 @@
     {% if mensagemCredita %}
         {{mensagemCredita}}
         {% endif %}
-    <label for="creditoAdicional">Digite a quantidade de credito que deseja adicionar. Saldo atual: {{credito}}</label>
+
+    <label for="creditoAdicional">Digite a quantidade de credito que deseja adicionar. Saldo atual: {{saldoAntigo}}</label>
     <input type="number" name="creditoAdicional" step="0.1" placeholder="0.00" min="0.00" required>
 
     <button type="submit">Creditar</button>
