@@ -1,19 +1,49 @@
 {% extends "base.html" %}
     
 {% block content %}
-{% if nenhum %}
-    <p>Cliente não cadastrado ou data de nascimento errada</p>
-    {% endif %}
-    
-<form action="/read/cliente/login" method="POST">
 
-    <label for="email">Insira teu email.</label>
-    <input type="text" name="email" placeholder="exemplo@exemplo.com">
-    <br>
-    <label for="senha">Insira tua senha.</label>
-    <input type="password" name="senha" placeholder="******">  
-    <br>
-    <button type="submit">Login</button>
-</form>
+{% if nenhum %}
+
+    <div class="row justify-content-center align-items-center text-center mt-4">
+        <div class="col-8 col-sm-6">
+            <div class="border" id="textoFeedback">
+                <p>Cliente não cadastrado ou data de nascimento errada</p>
+            </div>
+        </div>  
+    </div>
+
+{% endif %}
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-8 col-sm-6 align-items-center">
+            <div class="card" id="card">
+                <div class="card-header" id="cardHeader">
+                    <p>Faça teu login.</p>
+                </div>
+                <div class="card-body" id="cardBody">
+                    <form name="formLoginCliente" class action="/read/cliente/login" method="POST">
+                        <div class="row my-2 align-items-center">
+
+                            <div class="col-sm-3"><label for="email" class="form-label">Email:</label></div>
+                            <div class="col-sm-9"><input type="text" class="form-control" name="email" placeholder="exemplo@exemplo.com" onfocusout="validarLoginClienteEmail()"></div>
+                            </div>
+                            <div class="row my-2 align-items-center">
+
+                            <div class="col-sm-3"><label for="senha" class="form-label">Senha:</label></div>
+                            <div class="col-sm-9"><input type="password" class="form-control" name="senha" placeholder="******" onfocusout="validarLoginClienteSenha()"></div>
+
+                            <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton">Login</button></div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script defer src="{{ url_for('static', filename='js/validaLoginCliente/Email.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaLoginCliente/Senha.js') }}"></script>
 
 {% endblock %}

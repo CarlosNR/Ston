@@ -18,32 +18,67 @@ p{
 }
 
 hr{
+    /*font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));*/
     margin: calc(2px + (10 - 2) * ((100vw - 300px) / (1600 - 300))) !important;
 }
 
-#rowApresentacao{
+#rowHome{
     height: 86vh !important;
 }
 
-#colApresentacao{
+#colHome{
     transform: translate(0,-100%);
 }
 
-#textoApresentacao{
+#textoHome{
     margin: 0 !important;
     padding: 0 !important;
     border: solid 5px var(--azulClaro) !important;
     color: var(--azulClaro);
     border-radius: 7%;
-
-    /*font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) /
-        ([maximum viewport width] - [minimum viewport width])));*/
     font-size: calc(26px + (36 - 26) * ((100vw - 300px) / (1600 - 300))) !important;
+}
+
+#textoFeedback{
+    margin: 0 !important;
+    padding: 0 !important;
+    border: solid 2px var(--azulClaro) !important;
+    color: var(--azulClaro);
+    font-size: calc(16px + (24 - 16) * ((100vw - 300px) / (1600 - 300))) !important;
+}
+
+#card{
+    border-color: var(--azulForte);
+}
+
+#cardHeader{
+    background-color: var(--azulForte);
+    color: var(--amareloClaro);
+}
+
+#cardBody{
+    background-color: var(--amareloForte);
+    color: var(--cinza);
+
+}
+
+#cardButton{
+    border-color: var(--azulForte);
+    color: var(--azulForte);
+}
+
+#cardButton:hover{
+    background-color: var(--azulClaro) !important;
+    color: var(--cinza) !important;
+}
+
+.form-label{
+    margin-bottom: 0 !important;
 }
 
 @media (max-width: 768) {
     
-    #colApresentacao{
+    #colHome{
         transform: translate(0,400%) !important;
     }
 }

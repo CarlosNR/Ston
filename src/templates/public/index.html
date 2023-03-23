@@ -3,18 +3,18 @@
 {% block content %}
 
 
-<div class="row justify-content-center align-items-center text-center" id="rowApresentacao">
+<div class="row justify-content-center align-items-center text-center" id="rowHome">
     {% if dadosLogado %}
-        <div class="col-10 col-xs-10 col-sm-7 col-md-6" id="colApresentacao">
-            <div class="border" id="textoApresentacao">
+        <div class="col-10 col-xs-10 col-sm-7 col-md-6" id="colHome">
+            <div class="border" id="textoHome">
                 <p>{{dadosLogado.1}} está on na Ston!</p>
                 <hr>
                 <p>Seu saldo atual é {{dadosLogado.2}}</p>
             </div>
         </div>
     {% else %}
-        <div class="col-8 col-sm-6 col-md-4" id="colApresentacao">
-            <div class="border" id="textoApresentacao">
+        <div class="col-8 col-sm-6 col-md-4" id="colHome">
+            <div class="border" id="textoHome">
                 <p>Seja bem vindo a Ston.</p>
             </div>
         </div>

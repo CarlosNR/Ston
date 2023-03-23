@@ -5,7 +5,7 @@ const validarCadastroClienteSenha = async () => {
     const senha = senhaFormElement.value
 
     if(senha.length < 6){
-        senhaFormElement.setCustomValidity("senha invalido, inserir pelo menos 6 digitos.")
+        senhaFormElement.setCustomValidity("senha invalida, inserir pelo menos 6 digitos.")
         senhaFormElement.reportValidity()
     }else{
         senhaFormElement.setCustomValidity("")
