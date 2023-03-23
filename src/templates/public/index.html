@@ -2,14 +2,23 @@
     
 {% block content %}
 
-{% if dadosLogado %}
-    <p>{{dadosLogado.1}} está on na Ston!</p>
-    <p>Seu saldo atual é {{dadosLogado.2}}</p>
-    <a href="/read/jogo">Comprar game</a>
-    <form action="/read/cliente/logout" method="POST">
-        <button type="submit">Logout</button>
-    </form>
+
+<div class="row justify-content-center align-items-center text-center" id="rowApresentacao">
+    {% if dadosLogado %}
+        <div class="col-10 col-xs-10 col-sm-7 col-md-6" id="colApresentacao">
+            <div class="border" id="textoApresentacao">
+                <p>{{dadosLogado.1}} está on na Ston!</p>
+                <hr>
+                <p>Seu saldo atual é {{dadosLogado.2}}</p>
+            </div>
+        </div>
     {% else %}
-        Seja bem vindo a Ston.
-        {% endif %}
-{% endblock %}
+        <div class="col-8 col-sm-6 col-md-4" id="colApresentacao">
+            <div class="border" id="textoApresentacao">
+                <p>Seja bem vindo a Ston.</p>
+            </div>
+        </div>
+    {% endif %}
+    {% endblock %}            
+</div>
+

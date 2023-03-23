@@ -29,17 +29,17 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <button class="btn dropdown-toggle offCanvasButton" type="button">Zona Cliente:</button>
+                <button class="btn dropdown-toggle offCanvasButton" type="button">Zona do Cliente</button>
               </a>
               <ul class="dropdown-menu dropdown-menu-center">
                 <li> <p>Inclui operações que precisa estar logado</p> </li>
                 <li><hr class="dropdown-divider"></li>
                 {% if "idLogado" in session %}
-                  <li><a class="dropdown-item" href="/read/cliente/logout">Deslogar</a></li>
-                  <li><a class="dropdown-item" href="/read/jogo">Procurar game</a></li>
+                  <li><a class="dropdown-item" href="/read/cliente/logout"><p>Deslogar</p></a></li>
+                  <li><a class="dropdown-item" href="/read/jogo"><p>Procurar game</p></a></li>
 
                   {% else %}
-                    <li><a class="dropdown-item" href="/read/cliente/login">Login</a></li>
+                    <li><a class="dropdown-item" href="/read/cliente/login"><p>Login</p></a></li>
                 {% endif %}
               </ul>
             </li>
