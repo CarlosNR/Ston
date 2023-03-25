@@ -12,14 +12,14 @@ body{
     color: var(--cinza) !important;
 }
 
-p{
-    text-align: center;
-    margin: 0 !important;
-}
-
 hr{
     /*font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));*/
     margin: calc(2px + (10 - 2) * ((100vw - 300px) / (1600 - 300))) !important;
+}
+
+p{
+    text-align: center;
+    margin: 0 !important;
 }
 
 #rowHome{
@@ -65,6 +65,8 @@ hr{
 #cardButton{
     border-color: var(--azulForte);
     color: var(--azulForte);
+    background-color: var(--amareloForte);
+
 }
 
 #cardButton:hover{
@@ -72,13 +74,30 @@ hr{
     color: var(--cinza) !important;
 }
 
+#cardButtonDanger{
+    border-color: #dc3545;
+    background-color: var(--amareloForte);
+    color: var(--azulForte);
+}
+
+#cardButtonDanger:hover{
+    border-color: #bb2d3b;
+    background-color: #bb2d3b;
+    color: var(--amareloForte);
+}
+
 .form-label{
     margin-bottom: 0 !important;
 }
 
 @media (max-width: 768) {
-    
     #colHome{
         transform: translate(0,400%) !important;
+    }
+}
+
+@media (max-width: 991px) {
+    p{
+        font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300))) !important;
     }
 }

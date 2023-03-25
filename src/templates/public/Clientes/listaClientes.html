@@ -3,29 +3,54 @@
 {% block content %}
 
 {% if idApagado %}
-    <p>O cliente de id {{idApagado}} foi removido com sucesso.</p>
+    <div class="row">
+        <div class="col">
+            <p>O cliente de id {{idApagado}} foi removido com sucesso.</p>
+        </div>
+    </div>
     {% endif %}
 
 {% if mensagemCredita %}
-    <p>{{mensagemCredita}}</p>
+    <div class="row">
+        <div class="col">
+            <p>{{mensagemCredita}}</p>
+        </div>
+    </div>
     {% endif %}
 
-{% for cliente in listaClientes %}
-    <br>
-    Id: {{cliente.0}} 
-    <form action="/delete/cliente/{{cliente.0}}" method="POST">
-        <button>Deletar</button>
-    </form>
-    <p>Nome: {{cliente.1}} </p>
-    <p>Nascimento {{cliente.2.strftime('%d/%m/%Y')}}</p>
-    <p>Credito atual: {{cliente.3}}</p>
-    <p>Email: {{cliente.5}}</p>
-    <form action="/update/cliente/credito/{{cliente.0}}/{{cliente.3}}" method="POST">
-        <button>Creditar</button>
-    </form>
-
-        {% else %}
-        Não há clientes cadastrados.
+{% if listaClientes %}
+    {% for cliente in listaClientes %}
+        <div class="row justify-content-center my-4">
+            <div class="col-8 col-md-6 align-items-center">
+                <div class="card" id="card">
+                    <div class="card-header" id="cardHeader">
+                        <p>Id: {{cliente.0}}</p>
+                    </div>
+                    <div class="card-body" id="cardBody">                 
+                        <p>Nome: {{cliente.1}} </p>
+                        <p>Nascimento {{cliente.2.strftime('%d/%m/%Y')}}</p>
+                        <p>Credito atual: {{cliente.3}}</p>
+                        <p>Email: {{cliente.5}}</p>
+        
+                        <div class="row align-items-center mt-3">
+                            <div class="col-6 text-center">
+                                <form action="/delete/cliente/{{cliente.0}}" method="POST">
+                                    <button class="btn btn-danger" type="submit" id="cardButtonDanger"><p>Deletar</p></button>
+                                </form>
+                            </div>
+                            <div class="col-6 text-center">
+                                <form action="/update/cliente/credito/{{cliente.0}}/{{cliente.3}}" method="POST">
+                                    <button class="btn btn-success" type="submit" id="cardButton"><p>Creditar</p></button>
+                                </form>
+                            </div>
+                        <p></div></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Não há clientes cadastrados.</p>
     {% endfor %}
 
+{% endif %}
 {% endblock %}
