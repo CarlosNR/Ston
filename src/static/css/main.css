@@ -86,8 +86,17 @@ p{
     color: var(--amareloForte);
 }
 
+.btn{
+    font-size: 20px !important;
+}
+
 .form-label{
     margin-bottom: 0 !important;
+}
+
+.dropdown-menu{
+    background-color: var(--amareloForte) !important;
+    color: var(--cinza);
 }
 
 @media (max-width: 768) {

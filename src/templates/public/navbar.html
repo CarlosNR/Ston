@@ -36,7 +36,7 @@
                 <li><hr class="dropdown-divider"></li>
                 {% if "idLogado" in session %}
                   <li><a class="dropdown-item" href="/read/cliente/logout"><p>Deslogar</p></a></li>
-                  <li><a class="dropdown-item" href="/read/jogo"><p>Procurar game</p></a></li>
+                  <li><a class="dropdown-item" href="/read/jogo"><p>Pesquisar game</p></a></li>
 
                   {% else %}
                     <li><a class="dropdown-item" href="/read/cliente/login"><p>Login</p></a></li>
@@ -48,7 +48,7 @@
               <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <button class="btn dropdown-toggle offCanvasButton" type="button">Administrativo: Cliente</button>
               </a>
-              <ul class="dropdown-menu dropdown-menu-left">
+              <ul class="dropdown-menu dropdown-menu-center">
                 <li> <p>Acesso completo exceto login/logout</p> </li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="/read/clientes"><p>Listar clientes</p></a></li>
@@ -61,7 +61,7 @@
               <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <button class="btn dropdown-toggle offCanvasButton" type="button">Administrativo: Game</button>
               </a>
-              <ul class="dropdown-menu dropdown-menu-left">
+              <ul class="dropdown-menu dropdown-menu-center">
                 <li> <p>Acesso completo exceto comprar jogos</p> </li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="/read/jogos"><p>Listar jogos</p></a></li>

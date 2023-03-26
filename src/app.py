@@ -250,8 +250,8 @@ def readJogo2():
     if (jogos):
       return render_template('/public/jogos/listaJogo.html', jogos=jogos, dadosLogado=dadosLogado, listaComprados=listaComprados)
     else:
-      nada=True
-      return render_template('/public/jogos/listaJogo.html', nada=nada, dadosLogado=dadosLogado, listaComprados=listaComprados)
+      jogoEspecifico=True
+      return render_template('/public/jogos/listaJogo.html', jogoEspecifico=jogoEspecifico, dadosLogado=dadosLogado, listaComprados=listaComprados)
       
 @app.route('/update/jogo/preco/<int:id>', methods=['POST', 'GET'])
 def precificar1(id):
