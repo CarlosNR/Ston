@@ -38,28 +38,33 @@
 
 {% if listaJogosVazia != None %}  
     {% if dadosLogado %}
-    
+
         {% if jogoEspecifico != None %}
 
             {% for jogo in jogos %}
-                <hr>
-                <p>Id: {{jogo.0}} </p>
-                <p>Nome: {{jogo.1}} </p>
-                <p>Publicadora: {{jogo.2}}</p>
-                {% if jogo.3 %}
-                    <p>Maior18: Sim</p>
-                {% else %}
-                    <p>Maior18: Não</p> 
-                {% endif %}
-                <p>Genero: {{jogo.4}}</p>
-                <p>Preço: {{jogo.5}}</p>
-                {% if jogo.0 in listaComprados %}    
-                    <p>Game já adquirido</p>
-                {% else %}
-                    <form action="/insert/compra/{{jogo.0}}/{{jogo.1}}/{{jogo.5}}" method="POST">
-                        <button>Comprar</button>
-                    </form>
-                {% endif %}
+                <div class="card" id="card">
+                    <div class="card-body" id="cardBody">
+
+                        <p>Id: {{jogo.0}} </p>
+                        <p>Nome: {{jogo.1}} </p>
+                        <p>Publicadora: {{jogo.2}}</p>
+                        {% if jogo.3 %}
+                            <p>Maior18: Sim</p>
+                        {% else %}
+                            <p>Maior18: Não</p> 
+                        {% endif %}
+                        <p>Genero: {{jogo.4}}</p>
+                        <p>Preço: {{jogo.5}}</p>
+                        {% if jogo.0 in listaComprados %}    
+                            <p>Game já adquirido</p>
+                        {% else %}
+                            <form action="/insert/compra/{{jogo.0}}/{{jogo.1}}/{{jogo.5}}" method="POST">
+                                <button>Comprar</button>
+                            </form>
+                        {% endif %}
+
+                    </div>
+                </div>
             {% endfor %}
 
         {% endif %}
@@ -67,26 +72,27 @@
     {% else %}
 
         {% if jogoEspecifico != None %}
-
-                {% for jogo in jogos %}
-                <p>Id: {{jogo.0}} </p>
-                <p>Nome: {{jogo.1}} </p>
-                <p>Publicadora: {{jogo.2}}</p>
-                {% if jogo.3 %}
-                    <p>Maior18: Sim</p>
-                {% else %}
-                    <p>Maior18: Não</p> 
-                {% endif %}
-                <p>Genero: {{jogo.4}}</p>
-                <p>Preço: {{jogo.5}}</p>
-                    {% endfor %}
-                {% endif %}
+            {% for jogo in jogos %}
+                <div class="card" id="card">
+                    <div class="card-body" id="cardBody">
+                        
+                        <p>Id: {{jogo.0}} </p>
+                        <p>Nome: {{jogo.1}} </p>
+                        <p>Publicadora: {{jogo.2}}</p>
+                        {% if jogo.3 %}
+                            <p>Maior18: Sim</p>
+                        {% else %}
+                            <p>Maior18: Não</p> 
+                        {% endif %}
+                        <p>Genero: {{jogo.4}}</p>
+                        <p>Preço: {{jogo.5}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
 
     {% endif %}
 
 {% endif %}
-
-
-
 
 {% endblock %}
