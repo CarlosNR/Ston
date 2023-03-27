@@ -18,11 +18,11 @@
                     {% if mensagemCompraSucesso %}
                         <p>Compra realizada com sucesso:<br> {{nomeJogo}} foi adicionado a tua lista de jogos!</p>
                     {% endif %}
-                    {% if listaJogosVazia %}
-                        <p>{{listaJogosVazia}}</p>
-                    {% endif %}
                     {% if jogoEspecifico %}
                         <p>Nenhum game cadastrado com este nome.</p>
+                    {% endif %}
+                    {% if algum == False %}
+                        <p>Nenhum game cadastrado no sistema ainda.</p>
                     {% endif %}
                 </div>
             </div>
@@ -38,7 +38,6 @@
         </div>
     </div>
 </div>
-
 
 {% if listaJogosVazia != None %}  
     {% if dadosLogado %}
@@ -119,6 +118,8 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        {% else %}
+                        <p>Nenhum game cadastrado ainda.</p>
                     {% endif %}
                 </div>
             </div>

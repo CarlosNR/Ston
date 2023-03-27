@@ -219,11 +219,16 @@ def readJogo1():
       dadosLogado.append(session["idLogado"])
       dadosLogado.append(session["nomeLogado"])
       dadosLogado.append(session["creditoLogado"])
-
     else:
       dadosLogado = False
 
-    return render_template('/public/jogos/listaJogo.html', dadosLogado=dadosLogado)
+    listaTodosJogos = achaJogos()
+
+    if(listaTodosJogos == ""):
+        return render_template('/public/jogos/listaJogo.html', dadosLogado=dadosLogado, algum=True)
+    else:
+       return render_template('/public/jogos/listaJogo.html', dadosLogado=dadosLogado, algum=False)
+
 
 @app.route('/read/jogo', methods=['POST', 'GET'])
 def readJogo2():

@@ -25,10 +25,19 @@ p{
 
 #rowHome{
     height: 86vh !important;
+    
 }
 
 #colHome{
     transform: translate(0,-100%);
+}
+
+#rowCentroVertical{
+    height: 50vh !important;
+}
+
+#colCentroVertical{
+    transform: translate(0,35%);
 }
 
 #textoHome{
