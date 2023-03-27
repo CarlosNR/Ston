@@ -3,16 +3,16 @@
 {% block content %}
 
 {% if idApagado %}
-    <div class="row">
-        <div class="col">
+    <div class="row justify-content-center mt-4">
+        <div class="col-8 col-md-5 align-items-center">
             <p>O cliente de id {{idApagado}} foi removido com sucesso.</p>
         </div>
     </div>
     {% endif %}
 
 {% if mensagemCredita %}
-    <div class="row">
-        <div class="col">
+    <div class="row justify-content-center mt-4">
+        <div class="col-8 col-md-5 align-items-center">
             <p>{{mensagemCredita}}</p>
         </div>
     </div>
@@ -21,8 +21,18 @@
 {% if listaClientes %}
     {% for cliente in listaClientes %}
         <div class="row justify-content-center my-4">
-            <div class="col-8 col-md-6 align-items-center">
-                <div class="card" id="card">
+            <div class="col-8 col-md-5 align-items-center">
+                {% if (loop.index < 3) %}
+                    <div class="card mb-3" id="card"> 
+                    {% else %}
+                    <!-- nth child nao funciona quando tem row col envolvido: Cada card, 
+                    mesmo dentro de um card-group, é tratado como o
+                    primeiro de seu contexto. Eis a redundancia: -->
+                    {% if (loop.index % 2) %}
+                    <div class="card mb-3 hiddenEsquerda" id="card"> {% else %}
+                    <div class="card mb-3 hiddenDireita" id="card"> {% endif %}
+                    {% endif %}
+
                     <div class="card-header" id="cardHeader">
                         <p>Id: {{cliente.0}}</p>
                     </div>
@@ -33,24 +43,36 @@
                         <p>Email: {{cliente.5}}</p>
         
                         <div class="row align-items-center mt-2">
+                            
                             <div class="col-xs-6 col-sm-6 text-center mt-2 mb-1">
                                 <form action="/delete/cliente/{{cliente.0}}" method="POST">
                                     <button class="btn btn-danger" type="submit" id="cardButtonDanger"><p>Deletar</p></button>
                                 </form>
                             </div>
+
                             <div class="col-xs-6 col-sm-6 text-center mt-2 mb-1">
                                 <form action="/update/cliente/credito/{{cliente.0}}/{{cliente.3}}" method="POST">
                                     <button class="btn btn-success" type="submit" id="cardButton"><p>Creditar</p></button>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    {% else %}
-        <p>Não há clientes cadastrados.</p>
     {% endfor %}
-
+{% else %}
+    <div class="row justify-content-center my-4">
+        <div class="col-8 col-md-5 align-items-center">
+            <div class="card" id="card">
+                <div class="card-body" id="cardBody">                 
+                    <p>Não há clientes cadastrados</p>
+                </div>
+            </div>
+        </div>
+    </div>  
 {% endif %}
+<script defer src="{{ url_for('static', filename='js/animacaocard/animacaoDireita.js')}}"></script>
+<script defer src="{{ url_for('static', filename='js/animacaocard/animacaoEsquerda.js')}}"></script>
 {% endblock %}
