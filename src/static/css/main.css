@@ -134,4 +134,5 @@ primeiro de seu contexto. Eis a redundancia: */
     p{
         font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300))) !important;
     }
+    
 }

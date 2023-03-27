@@ -47,8 +47,7 @@
                 <div class="row row-cols-1 row-cols-md-2 g-2 justify-content-center align-items-center">
                     {% if jogoEspecifico != None %}
                         {% for jogo in jogos %}
-                            <div class="col">
-                                
+                            <div class="col"> 
                                 {% if (loop.index < 3) %}
                                 <div class="card mb-3" id="card"> 
                                 {% else %}
@@ -57,22 +56,21 @@
                                 {% if (loop.index % 2) %}
                                 <div class="card mb-3 hiddenEsquerda" id="card"> {% else %}
                                 <div class="card mb-3 hiddenDireita" id="card"> {% endif %}
-
                                 {% endif %}
 
                                     <div class="card-body" id="cardBody">
-                                        <p>Id: {{jogo.0}} </p>
-                                        <p>Nome: {{jogo.1}} </p>
+                                        <p class="card-text">Id: {{jogo.0}} </p>
+                                        <p class="card-text">Nome: {{jogo.1}} </p>
                                         <p>Publicadora: {{jogo.2}}</p>
                                         {% if jogo.3 %}
-                                            <p>Maior18: Sim</p>
+                                            <p class="card-text">Maior18: Sim</p>
                                         {% else %}
-                                            <p>Maior18: Não</p>
+                                            <p class="card-text">Maior18: Não</p>
                                         {% endif %}
-                                        <p>Genero: {{jogo.4}}</p>
-                                        <p>Preço: {{jogo.5}}</p>
+                                        <p class="card-text">Genero: {{jogo.4}}</p>
+                                        <p class="card-text">Preço: {{jogo.5}}</p>
                                         {% if jogo.0 in listaComprados %}
-                                            <p>Game já adquirido</p>
+                                            <p class="card-text">Game já adquirido</p>
                                         {% else %}
                                             <form action="/insert/compra/{{jogo.0}}/{{jogo.1}}/{{jogo.5}}" method="POST">
                                                 <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton">Comprar</button></div>
@@ -94,7 +92,16 @@
                     {% if jogoEspecifico != None %}
                         {% for jogo in jogos %}
                             <div class="col">
-                                <div class="card mb-3" id="card">
+                                {% if (loop.index < 3) %}
+                                <div class="card mb-3" id="card"> 
+                                {% else %}
+                                <!-- nth child nao funciona quando tem row col envolvido: Cada card, mesmo dentro de um card-group, é tratado como o
+                                primeiro de seu contexto. Eis a redundancia: -->
+                                {% if (loop.index % 2) %}
+                                <div class="card mb-3 hiddenEsquerda" id="card"> {% else %}
+                                <div class="card mb-3 hiddenDireita" id="card"> {% endif %}
+                                {% endif %}
+
                                     <div class="card-body" id="cardBody">
                                         <p class="card-text">Id: {{jogo.0}} </p>
                                         <p class="card-text">Nome: {{jogo.1}} </p>
@@ -118,7 +125,8 @@
     {% endif %}
 
 {% endif %}
-<script defer src="{{ url_for('static', filename='js/animacaoDireita.js')}}"></script>
-<script defer src="{{ url_for('static', filename='js/animacaoEsquerda.js')}}"></script>
+
+<script defer src="{{ url_for('static', filename='js/animacaocard/animacaoDireita.js')}}"></script>
+<script defer src="{{ url_for('static', filename='js/animacaocard/animacaoEsquerda.js')}}"></script>
 
 {% endblock %}
