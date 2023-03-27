@@ -10,6 +10,7 @@
 body{
     background-color: var(--amareloClaro) !important; 
     color: var(--cinza) !important;
+    overflow-x:hidden !important;
 }
 
 hr{
@@ -59,7 +60,6 @@ p{
 #cardBody{
     background-color: var(--amareloForte);
     color: var(--cinza);
-
 }
 
 #cardButton{
@@ -67,6 +67,31 @@ p{
     color: var(--azulForte);
     background-color: var(--amareloForte);
 
+}
+
+/* nth child nao funciona quando tem row col envolvido: Cada card, mesmo dentro de um card-group, é tratado como o
+primeiro de seu contexto. Eis a redundancia: */
+
+.hiddenDireita{
+    opacity: 0 !important;
+    filter: blur(5px) !important;
+    transform: translateX(100%) !important;
+    transition: all 1s !important;
+    /* background-color: green !important; */
+}
+
+.hiddenEsquerda{
+    opacity: 0 !important;
+    filter: blur(5px) !important;
+    transform: translateX(-100%) !important;
+    transition: all 1s !important;
+    /* background-color: blue !important; */
+}
+
+.show{ 
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    transform: translateX(0) !important;
 }
 
 #cardButton:hover{
