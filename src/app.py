@@ -67,17 +67,17 @@ def readCliente1():
 def readCliente2():
 
     id = request.form['id']
-    dadosLogin = achaCliente(id)
+    dadosUsuario = achaCliente(id)
     nomeJogos = []
-    if (dadosLogin):
+    if (dadosUsuario):
       compras = achaCompras(id)
       if(compras):
         for compra in compras:
           jogo = achaJogoId(compra[2])
           nomeJogos.append(jogo[1])
-        return render_template('/public/clientes/listaCliente.html', dadosLogin=dadosLogin, nomeJogos=nomeJogos)
+        return render_template('/public/clientes/listaCliente.html', dadosUsuario=dadosUsuario, nomeJogos=nomeJogos)
       else:
-        return render_template('/public/clientes/listaCliente.html', dadosLogin=dadosLogin)
+        return render_template('/public/clientes/listaCliente.html', dadosUsuario=dadosUsuario)
     else:
       nenhum = True
       return render_template('/public/clientes/listaCliente.html', nenhum=nenhum)

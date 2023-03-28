@@ -2,31 +2,63 @@
     
 {% block content %}
 
-<form action="/read/cliente" method="POST">
-    <label for="id">Insira o id do usuário que deseja pesquisar:</label>
-    <input name="id" type="number">
-    <button type="submit">Pesquisar</button>
-</form>
+<div class="row justify-content-center mt-4">
+    <div class="col-8 col-sm-6 align-items-center">
+        <div class="card" id="card">
+            <div class="card-header" id="cardHeader">
+                <div class="row my-2 align-items-center">
+                    <p class="card-text">Pesquisa unitária de cliente.</p>
+                    {% if nenhum == True %}
+                        <p class="card-text">Cliente solicitado não está cadastrado.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-body" id="cardBody">
+                <div class="row my-2 align-items-center">
+                    <form name="formBuscaIdCliente" action="/read/cliente" method="POST">
+                        <div class="row mt-2 align-items-center">
+                            <div class="col-sm-4"><label for="id" class="form-label"><p>Id do cliente:</p></label></div>
+                            <div class="col-sm-8"><input name="id" type="text" class="form-control" onfocusout="validarId()"></div>
+                            <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton" onclick="validarId()">Pesquisar</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-{% if dadosLogin %}
-    <p>O cliente de id: {{dadosLogin.0}}</p>
-    <p>Se chama: {{dadosLogin.1}}</p>
-    <p>Nasceu em: {{dadosLogin.2.strftime('%d-%m-%Y')}}</p>
-    <p>Tem de saldo: {{dadosLogin.3}}</p>
-    <p>Email: {{dadosLogin.5}}</p>
-{% if nomeJogos %}
-    <p>E realizou as seguintes compras:</p>
-    {% for nomeJogo in nomeJogos %}
-        <p>{{nomeJogo}}</p>
-        {% endfor %}
-    {% else %}
-        <p>
-            Porém ainda não realizou nenhuma compra.
-            Não perca tempo, compre seus games na Ston!
-        </p>
-    {% endif %}
-    {% elif nenhum == True %}
-        <p>Cliente solicitado não está cadastrado.</p>
-    {% endif %}
+{% if dadosUsuario %}
 
+    <div class="row justify-content-center mt-4">
+        <div class="col-8 col-sm-6 align-items-center">
+            <div class="card" id="card">
+                <div class="card-body" id="cardBody">
+                    <div class="row my-2 align-items-center">
+                        <p class="card-text">O cliente de id: {{dadosUsuario.0}}</p>
+                        <p class="card-text">Se chama: {{dadosUsuario.1}}</p>
+                        <p class="card-text">Nasceu em: {{dadosUsuario.2.strftime('%d/%m/%Y')}}</p>
+                        <p class="card-text">Tem de saldo: {{dadosUsuario.3}}</p>
+                        <p class="card-text">Email: {{dadosUsuario.5}}</p>
+                    
+                        {% if nomeJogos %}
+                            <div class="col-12"><hr></div>
+                            <p class="card-text">E realizou as seguintes compras:</p>
+                            {% for nomeJogo in nomeJogos %}
+                                <p class="card-text">{{nomeJogo}}</p>
+                                {% endfor %}
+                            {% else %}
+                                <div class="col-12"><hr></div>
+                                <p class="card-text">Porém ainda não realizou nenhuma compra.</p>
+                            {% endif %}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+<script defer src="{{url_for('static', filename='js/validaReadCliente/id.js') }}
+"></script>
 {% endblock %}
