@@ -46,11 +46,11 @@
                             <p class="card-text">E realizou as seguintes compras:</p>
                             {% for nomeJogo in nomeJogos %}
                                 <p class="card-text">{{nomeJogo}}</p>
-                                {% endfor %}
-                            {% else %}
-                                <div class="col-12"><hr></div>
-                                <p class="card-text">Porém ainda não realizou nenhuma compra.</p>
-                            {% endif %}                        
+                            {% endfor %}
+                        {% else %}
+                            <div class="col-12"><hr></div>
+                            <p class="card-text">Porém ainda não realizou nenhuma compra.</p>
+                        {% endif %}                        
                     </div>
                 </div>
             </div>
