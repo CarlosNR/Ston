@@ -2,38 +2,83 @@
     
 {% block content %}
 
-{% if mensagem %}
-    {{mensagem}}
-    {% endif %}
-
-    <div class="row">
-        <div class="col-sm-9">
-            <form action="/insert/jogo" method="POST">
-                <input type="text" name="nome" placeholder="Nome do jogo">
-                <input type="text" name="publicadora" placeholder="Empresa que publicou o jogo">
-                <input type="text" name="genero" placeholder="Estilo do jogo, luta, rpg...">
-                <input type="number" name="preco" placeholder="Preço do jogo: 0.00" min="0" step="0.1">
-                
-                <p>O jogo é para maiores de 18 anos?</p>
-                    <input type="radio" id="maior18" name="maior18" value="True">
-                    <label for="maior18">Sim</label><br>
-                    <input type="radio" id="menor18" name="maior18" value="False">
-                    <label for="menor18">Não</label><br>
-            
-                <button type="submit">Cadastrar</button>
-            </form>        </div>
-        <div class="col-sm">
-            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                <p style="text-align: justify;">
-                    Para realizar um teste de duas versoes do mesmo game, cadastre 2 jogos com nome parecido, por exemplo:<br>
-                    Street Fighter Turbo Edition e <br>
-                    Street Fighter
-                </p>
-            </button>
-
-        </div>
-
+<div class="row justify-content-center align-items-center text-center mt-4">
+    <div class="col-8 col-sm-6">
+        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+            <p style="text-align: center; color: #ffffffd0;">
+                Para realizar um teste de duas versoes do mesmo game,<br>
+                cadastre 2 versões do mesmo jogo, por exemplo:<br>
+            </p>
+            <ul class="list-group">
+                <li class="list-group-item">Street Fighter</li>
+                <li class="list-group-item">Street Fighter Turbo Edition</li>
+            </ul>
+        </button>
     </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-10 col-md-8 align-items-center">
+        <div class="card" id="card">
+            <div class="card-header" id="cardHeader">
+                {% if mensagem %}
+                    <p>{{mensagem}}</p>
+                {% endif %}
+            </div>
+            <div class="card-body" id="cardBody">
+                <form name="formCadastraJogo" action="/insert/jogo" method="POST">
+
+                    <div class="row my-2 justify-content-center align-items-center">
+
+                        <div class="col-4 col-sm-3"><label for="nome" class="form-label">
+                            <p>Nome:</p></label>
+                        </div>
+                        <div class="col-8 col-sm-9"><input type="text" name="nome" 
+                            placeholder="Megaman X" class="form-control"></div>
+
+                        <div class="col-4 col-sm-3"><label for="publicadora" class="form-label">
+                            <p>Publicadora:</p></label>
+                        </div>
+                        <div class="col-8 col-sm-9 align-items-center"><input type="text" name="publicadora" 
+                            placeholder="Capcom" class="form-control"></div>
+
+                        <div class="col-4 col-sm-3"><label for="genero" class="form-label">
+                            <p>Genero:</p></label>
+                        </div>
+                        <div class="col-8 col-sm-9"><input type="text" name="genero" 
+                            placeholder="Plataforma" class="form-control"></div>
+
+                        <div class="col-4 col-sm-3"><label for="preco" class="form-label" class="form-control">
+                            <p>Preco:</p></label>
+                        </div>
+                        <div class="col-8 col-sm-9"><input type="number" name="preco" 
+                            placeholder="0.00" min="0" step="0.1" class="form-control"></div>
+
+                    </div>
+                    <div class="row my-2 justify-content-center align-items-center">
+    
+                        <div class="col-6 col-sm-6">
+                            <p style="text-align: left;">O jogo é para maiores de 18 anos?</p>
+                        </div>
+
+                        <div class="col-6 col-sm-6 ">
+                            <select name="maior18" class="form-select">
+                                <option selected value="False">Não</option>
+                                <option value="True">Sim</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton">Cadastrar</button></div>
+
+                    </div>
+
+                </form>
+            </div>
+          </div>
+                
+    </div>
+</div>
 
 
 {% endblock %}

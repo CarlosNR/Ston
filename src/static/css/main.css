@@ -21,6 +21,7 @@ hr{
 p{
     text-align: center;
     margin: 0 !important;
+    font-size: 20px;
 }
 
 #rowHome{
@@ -141,7 +142,7 @@ primeiro de seu contexto. Eis a redundancia: */
 
 @media (max-width: 991px) {
     p{
-        font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300))) !important;
+        font-size: calc(18px + (24 - 20) * ((100vw - 300px) / (1600 - 300))) !important;
     }
-    
+  
 }

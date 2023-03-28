@@ -37,3 +37,4 @@ const validarCadastroClienteEmail = async () => {
     }
 
 }
+

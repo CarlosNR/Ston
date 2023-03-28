@@ -8,7 +8,7 @@
         <div class="card" id="card">
             <div class="card-header" id="cardHeader">
                 <div class="row my-2 justify-content-center align-items-center text-center">
-                    <div class="col-8 col-sm-6">
+                    <div class="col-8 col-sm-8">
                         {% if dados %}
                             <p>Cadastro concluído com sucesso, teu id é {{dados.0}}.</p>
                         {% endif %}
@@ -21,21 +21,45 @@
                     <div class="row my-2 align-items-center">
 
                         <div class="col-sm-4"><label for="nome" class="form-label"><p>Nome:</p></label></div>
-                        <div class="col-sm-8"><input type="text" name="nome" class="form-control" placeholder="Nome completo" onfocusout="validarCadastroClienteNome()"></div>
+                        <div class="col-sm-8">
+                            <input type="text" name="nome" class="form-control" 
+                            placeholder="Nome completo" onfocusout="validarCadastroClienteNome()" 
+                            oninput="setCustomValidity('')">
+                        </div>
                         
                         <div class="col-sm-4"><label for="nascimento" class="form-label"><p>Data de nascimento:</p></label></div>
-                        <div class="col-sm-8"><input type="text" name="nascimento" class="form-control" placeholder="dd/mm/aaaa" onfocusout="validarCadastroClienteData()"></div>
+                        <div class="col-sm-8">
+                            <input type="text" name="nascimento" class="form-control" 
+                            placeholder="dd/mm/aaaa" onfocusout="validarCadastroClienteData()" oninput="setCustomValidity('')">
+                        </div>
                         
                         <div class="col-sm-4"><label for="credito" class="form-label"><p>Credito:</p></label></div>
-                        <div class="col-sm-8"><input type="number" name="credito" class="form-control" placeholder="0.00" step="0.1" min="0.00" onfocusout="validarCadastroClienteCredito()"></div>
+                        <div class="col-sm-8">
+                            <input type="number" name="credito" class="form-control" 
+                            placeholder="0.00" step="0.1" min="0.00" onfocusout="validarCadastroClienteCredito()" 
+                            oninput="setCustomValidity('')">
+                        </div>
                         
                         <div class="col-sm-4"><label for="senha" class="form-label"><p>Senha:</p></label></div>
-                        <div class="col-sm-8"><input type="password" name="senha" class="form-control" placeholder="******" onfocusout="validarCadastroClienteSenha()"></div>
+                        <div class="col-sm-8">
+                            <input type="password" name="senha" class="form-control" 
+                            placeholder="******" onfocusout="validarCadastroClienteSenha()" oninput="setCustomValidity('')">
+                        </div>
                         
                         <div class="col-sm-4"><label for="email" class="form-label"><p>Email:</p></label></div>
-                        <div class="col-sm-8"><input type="text" name="email" class="form-control" placeholder="exemplo@exemplo.com" onfocusout="validarCadastroClienteEmail()"></div>
+                        <div class="col-sm-8">
+                            <input type="text" name="email" class="form-control" 
+                            placeholder="exemplo@exemplo.com" onfocusout="validarCadastroClienteEmail()" 
+                            oninput="setCustomValidity('')">
+                        </div>
                         
-                        <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton">Cadastrar</button></div>
+                        <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton" 
+                            onclick="validarCadastroClienteNome(); 
+                            validarCadastroClienteData(); 
+                            validarCadastroClienteCredito();
+                            validarCadastroClienteSenha();
+                            validarCadastroClienteEmail();">Cadastrar</button>
+                        </div>
                     </div>
     
                 </form>
