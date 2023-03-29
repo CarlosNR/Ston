@@ -90,7 +90,7 @@ primeiro de seu contexto. Eis a redundancia: */
     /* background-color: blue !important; */
 }
 
-.show{ 
+.showCard{ 
     opacity: 1 !important;
     filter: blur(0) !important;
     transform: translateX(0) !important;

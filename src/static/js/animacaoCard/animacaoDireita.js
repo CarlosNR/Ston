@@ -7,9 +7,9 @@ function reveal() {
       var elementVisible = 150;
   
       if (elementTop < windowHeight - elementVisible) {
-        reveals[i].classList.add("show");
+        reveals[i].classList.add("showCard");
       } else {
-        reveals[i].classList.remove("show");
+        reveals[i].classList.remove("showCard");
       }
     }
   }

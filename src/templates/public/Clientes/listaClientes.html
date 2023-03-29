@@ -24,23 +24,25 @@
             <div class="col-8 col-md-5 align-items-center">
                 {% if (loop.index < 3) %}
                     <div class="card mb-3" id="card"> 
-                    {% else %}
+                {% else %}
                     <!-- nth child nao funciona quando tem row col envolvido: Cada card, 
                     mesmo dentro de um card-group, é tratado como o
                     primeiro de seu contexto. Eis a redundancia: -->
                     {% if (loop.index % 2) %}
-                    <div class="card mb-3 hiddenEsquerda" id="card"> {% else %}
-                    <div class="card mb-3 hiddenDireita" id="card"> {% endif %}
+                    <div class="card mb-3 hiddenEsquerda" id="card"> 
+                    {% else %}
+                    <div class="card mb-3 hiddenDireita" id="card"> 
                     {% endif %}
+                {% endif %}
 
                     <div class="card-header" id="cardHeader">
                         <p>Id: {{cliente.0}}</p>
                     </div>
                     <div class="card-body" id="cardBody">                 
-                        <p>Nome: {{cliente.1}} </p>
-                        <p>Nascimento {{cliente.2.strftime('%d/%m/%Y')}}</p>
-                        <p>Credito atual: {{cliente.3}}</p>
-                        <p>Email: {{cliente.5}}</p>
+                        <p class="card-text">Nome: {{cliente.1}} </p>
+                        <p class="card-text">Nascimento {{cliente.2.strftime('%d/%m/%Y')}}</p>
+                        <p class="card-text">Credito atual: {{cliente.3}}</p>
+                        <p class="card-text">Email: {{cliente.5}}</p>
         
                         <div class="row align-items-center mt-2">
                             
