@@ -2,23 +2,16 @@
     
 {% block content %}
 
-{% if nenhum %}
 
-    <div class="row justify-content-center align-items-center text-center mt-4">
-        <div class="col-8 col-sm-6">
-            <div class="border" id="textoFeedback">
-                <p>Cliente não cadastrado ou senha errada</p>
-            </div>
-        </div>  
-    </div>
-
-{% endif %}
 
     <div class="row justify-content-center mt-4">
         <div class="col-8 col-sm-6 align-items-center">
             <div class="card" id="card">
                 <div class="card-header" id="cardHeader">
                     <p>Faça teu login.</p>
+                    {% if nenhum %}
+                        <p>Cliente não cadastrado ou senha errada</p>
+                    {% endif %}
                 </div>
                 <div class="card-body" id="cardBody">
                     <form name="formLoginCliente" class action="/read/cliente/login" method="POST">

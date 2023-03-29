@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+
     
 {% block content %}
 
 <div class="row justify-content-center align-items-center text-center mt-4">
     <div class="col-8 col-sm-6">
-        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+
+     
+        <!-- <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
             <p style="text-align: center; color: #ffffffd0;">
                 Para realizar um teste de duas versoes do mesmo game,<br>
                 cadastre 2 versões do mesmo jogo, por exemplo:<br>
@@ -13,7 +16,7 @@
                 <li class="list-group-item">Street Fighter</li>
                 <li class="list-group-item">Street Fighter Turbo Edition</li>
             </ul>
-        </button>
+        </button> -->
     </div>
 </div>
 
@@ -55,13 +58,13 @@
                             placeholder="0.00" min="0" step="0.1" class="form-control"></div>
 
                     </div>
-                    <div class="row my-2 justify-content-center align-items-center">
+                    <div class="row my-2  align-items-center">
     
-                        <div class="col-6 col-sm-6">
+                        <div class="col-9 col-sm-9">
                             <p style="text-align: left;">O jogo é para maiores de 18 anos?</p>
                         </div>
 
-                        <div class="col-6 col-sm-6 ">
+                        <div class="col-3 col-sm-3">
                             <select name="maior18" class="form-select">
                                 <option selected value="False">Não</option>
                                 <option value="True">Sim</option>
@@ -79,6 +82,10 @@
                 
     </div>
 </div>
-
-
+<script defer>
+    window.addEventListener('load', function(){
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    })
+</script>
 {% endblock %}
