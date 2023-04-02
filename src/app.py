@@ -200,15 +200,15 @@ def listaJogos():
     listaJogos = achaJogos()
 
     if("mensagemPrecificar" in session):
-      mensagem = session["mensagemPrecificar"]  
+      mensagemPrecificar = session["mensagemPrecificar"]  
       del session["mensagemPrecificar"]
-      return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos, mensagem=mensagem)
+      return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos, mensagemPrecificar=mensagemPrecificar)
       
     if("mensagemErroDeleteJogo" in session):
       mensagemErroDeleteJogo = session["mensagemErroDeleteJogo"]
       del session["mensagemErroDeleteJogo"]
       return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos, mensagemErroDeleteJogo=mensagemErroDeleteJogo)
-
+  
     return render_template('/public/jogos/listaJogos.html', listaJogos=listaJogos)
 
 @app.route('/read/jogo')
@@ -269,21 +269,31 @@ def precificar2(id,preco):
   novoPreco = request.form['novoPreco']
   atualizaPrecoJogo(id, novoPreco) 
   jogo = achaJogoId(id)
-  session["mensagemPrecificar"] = "O jogo %s teve seu valor modificado de %.2f para %.2f" % (jogo[2], float(preco), float(novoPreco))
+  session["mensagemPrecificar"] = "O jogo %s teve seu valor modificado de %.2f para %.2f" % (jogo[1], float(preco), float(novoPreco))
   return redirect('/read/jogos')
 
 @app.route('/delete/jogo/<idApagado>', methods=['POST', 'GET'])
 def excluiJogo(idApagado):
 
-  try:
-    nome = deletaJogo(idApagado)
-    mensagemDeleteJogo = "Jogo "+nome[0]+" foi deletado com sucesso."
+    existe = achaJogoId(idApagado)
+    
+    if existe:
+        nome = deletaJogo(idApagado)
+        listaJogos = achaJogos()
 
-    listaJogos = achaJogos()
-    return render_template('/public/jogos/listaJogos.html', idApagado=idApagado, listaJogos=listaJogos, mensagemDeleteJogo=mensagemDeleteJogo)
-  except:
-    session["mensagemErroDeleteJogo"] = "Jogo não pode ser apagado pois alguem já comprou."
-    return redirect('/read/jogos')
+        if(nome != None):
+          mensagemDeleteJogo = "O jogo "+nome[0]+" foi deletado com sucesso."
+          return render_template('/public/jogos/listaJogos.html', idApagado=idApagado, mensagemDeleteJogo=mensagemDeleteJogo, listaJogos=listaJogos)
+
+        if(nome == None):
+          session["mensagemErroDeleteJogo"] = "Jogo não pode ser apagado pois alguem já comprou."  
+          return redirect('/read/jogos')
+
+    else:
+        session["mensagemErroDeleteJogo"] = "Jogo não pode ser apagado pois não existe mais no sistema."
+        return redirect('/read/jogos')
+
+   
 
 #Compras
 @app.route('/insert/compra/<int:idJogo>/<string:nomeJogo>/<float:preco>', methods=['POST', 'GET'])

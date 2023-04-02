@@ -2,8 +2,6 @@
     
 {% block content %}
 
-
-
     <div class="row justify-content-center mt-4">
         <div class="col-8 col-sm-6 align-items-center">
             <div class="card" id="card">
@@ -22,6 +20,7 @@
                                 placeholder="exemplo@exemplo.com" onfocusout="validarLoginClienteEmail()" 
                                 oninput="setCustomValidity('')">
                             </div>
+                            
                         </div>
                         <div class="row my-2 align-items-center">
 
@@ -39,7 +38,6 @@
             </div>
         </div>
     </div>
-
 
 <script defer src="{{ url_for('static', filename='js/validaLoginCliente/Email.js') }}"></script>
 <script defer src="{{ url_for('static', filename='js/validaLoginCliente/Senha.js') }}"></script>
