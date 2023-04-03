@@ -1,10 +1,10 @@
-const validarPreco = async () => {
+const validarValor = async () => {
 
-    const formCadastro = document.forms["precifica"]
+    const formCadastro = document.forms["formPrecifica"]
     const precoFormElement = formCadastro['novoPreco']
-    const preco = Number(precoFormElement.value)
+    const preco = precoFormElement.value
 
-    if(preco >= 0){
+    if(preco >= 0 && preco !== ""){
         precoFormElement.setCustomValidity("")
     }else{
         precoFormElement.setCustomValidity("Valor invalido, inserir um número igual ou maior que 0.")

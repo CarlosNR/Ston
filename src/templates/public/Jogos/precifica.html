@@ -2,7 +2,6 @@
     
 {% block content %}
 
-
 <div class="row justify-content-center mt-4">
     <div class="col-8 col-sm-6 align-items-center">
         <div class="card" id="card">
@@ -10,12 +9,23 @@
               <p>Atualizar valor do jogo.</p>
             </div>
             <div class="card-body" id="cardBody">
-                <form name="precifica" form action="/update/jogo/preco/{{id}}/{{preco}}" method="POST">
+                <form name="formPrecifica" form action="/update/jogo/preco/{{id}}/{{preco}}" method="POST">
 
                     <div class="row my-2 align-items-center">
-                        <div class="col-sm-6"><label for="novoPreco" class="form-label"><p>Digite o novo valor do jogo. Valor atual: {{preco}}</p></label></div>
-                        <div class="col-sm-6"><input type="number" name="novoPreco" step="0.1" placeholder="0.00" min="0.00" class="form-control" onfocusout="validarPreco()" oninput="setCustomValidity('')"></div>
-                        <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton">Atualizar</button></div>
+
+                        <div class="col-sm-6">
+                            <label for="novoPreco" class="form-label">
+                                <p>Digite o novo valor do jogo. Valor atual: {{preco}}</p>
+                            </label>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="number" name="novoPreco" step="0.1" placeholder="0.00" min="0.00" class="form-control" onfocusout="validarValor()" oninput="setCustomValidity('')">
+                        </div>
+                        
+                        <div class="col-12 mt-4 text-center">
+                            <button class="btn" type="submit" id="cardButton" onclick="validarValor()">Atualizar valor</button>
+                        </div>
                     </div>
     
                 </form>
@@ -24,6 +34,6 @@
     </div>
 </div>
 
-<script defer src="{{ url_for('static', filename='js/validaPrecifica/preco.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaAtualizaValor/valor.js') }}"></script>
 
 {% endblock %}

@@ -36,25 +36,24 @@
                             <p>Nome:</p></label>
                         </div>
                         <div class="col-8 col-sm-9"><input type="text" name="nome" 
-                            placeholder="Megaman X" class="form-control"></div>
+                            placeholder="Megaman X" class="form-control" onfocusout="validarCadastroJogoNome()" oninput="setCustomValidity('')"></div>
 
                         <div class="col-4 col-sm-3"><label for="publicadora" class="form-label">
                             <p>Publicadora:</p></label>
                         </div>
-                        <div class="col-8 col-sm-9 align-items-center"><input type="text" name="publicadora" 
-                            placeholder="Capcom" class="form-control"></div>
+                        <div class="col-8 col-sm-9 align-items-center"><input type="text" name="publicadora" placeholder="Capcom" class="form-control" onfocusout="validarCadastroJogoPublicadora()" oninput="setCustomValidity('')"></div>
 
                         <div class="col-4 col-sm-3"><label for="genero" class="form-label">
                             <p>Genero:</p></label>
                         </div>
                         <div class="col-8 col-sm-9"><input type="text" name="genero" 
-                            placeholder="Plataforma" class="form-control"></div>
+                            placeholder="Plataforma" class="form-control" onfocusout="validarCadastroJogoGenero()" oninput="setCustomValidity('')"></div>
 
                         <div class="col-4 col-sm-3"><label for="preco" class="form-label" class="form-control">
-                            <p>Preco:</p></label>
+                            <p>Valor:</p></label>
                         </div>
                         <div class="col-8 col-sm-9"><input type="number" name="preco" 
-                            placeholder="0.00" min="0" step="0.1" class="form-control"></div>
+                            placeholder="0.00" min="0" step="0.1" class="form-control" onfocusout="validarCadastroJogoPreco()" oninput="setCustomValidity('')"></div>
 
                     </div>
                     <div class="row my-2  align-items-center">
@@ -71,9 +70,12 @@
                         </div>
                         <div class="col col-xs-2 col-sm-2"></div>
 
-
-
-                        <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton">Cadastrar</button></div>
+                        <div class="col-12 mt-4 text-center"><button class="btn" type="submit" id="cardButton" onclick="
+                            validarCadastroJogoNome(); 
+                            validarCadastroJogoPublicadora();
+                            validarCadastroJogoGenero();
+                            validarCadastroJogoPreco();
+                        ">Cadastrar</button></div>
 
                     </div>
 
@@ -83,4 +85,12 @@
                 
     </div>
 </div>
+
+<!-- Validadores -->
+<script defer src="{{ url_for('static', filename='js/validaCadastroJogo/Nome.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaCadastroJogo/Publicadora.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaCadastroJogo/Genero.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/validaCadastroJogo/Preco.js') }}"></script>
+
+
 {% endblock %}

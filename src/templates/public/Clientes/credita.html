@@ -2,16 +2,41 @@
     
 {% block content %}
 
-<form action="/update/cliente/credito/{{id}}/valor" method="POST">
+<div class="row justify-content-center mt-4">
+    <div class="col-8 col-sm-6 align-items-center">
+        <div class="card" id="card">
+            <div class="card-header" id="cardHeader">
+                <p>Atualizar credito do cliente.</p>
+                {% if mensagemCredita %}
+                    <p>{{mensagemCredita}}</p>
+                {% endif %}
+            </div>
+            <div class="card-body" id="cardBody">
+                <form name="formCredita" form action="/update/cliente/credito/{{id}}/valor" method="POST">
 
-    {% if mensagemCredita %}
-        {{mensagemCredita}}
-        {% endif %}
+                    <div class="row my-2 align-items-center">
 
-    <label for="creditoAdicional">Digite a quantidade de credito que deseja adicionar. Saldo atual: {{saldoAntigo}}</label>
-    <input type="number" name="creditoAdicional" step="0.1" placeholder="0.00" min="0.00" required>
+                        <div class="col-sm-6">
+                            <label for="creditoAdicional" class="form-label">
+                                <p>Digite a quantidade de credito que deseja adicionar. Saldo atual: {{saldoAntigo}}</p>
+                            </label>
+                        </div>
 
-    <button type="submit">Creditar</button>
-</form>
+                        <div class="col-sm-6">
+                            <input type="number" name="creditoAdicional" step="0.1" placeholder="0.00" min="0.00" class="form-control" onfocusout="validarCredito()" oninput="setCustomValidity('')">
+                        </div>
+                        
+                        <div class="col-12 mt-4 text-center">
+                            <button class="btn" type="submit" id="cardButton" onclick="validarCredito()">Atualizar credito</button>
+                        </div>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script defer src="{{ url_for('static', filename='js/validaAtualizaCredito/credito.js') }}"></script>
 
 {% endblock %}
